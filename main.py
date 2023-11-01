@@ -1,22 +1,29 @@
+import csv
+
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 
 
 def extractListFromString(citiesNames):
-    return list()
+    #for cityArea in citiesNames.split(", "):
+    #    city = cityArea.split("-")
+    #    print(city[0])
+
+    result = set([cityArea.split("-")[0].strip() for cityArea in citiesNames.split(", ")])
+    return result
 
 
 def findDate(element):
-    return "12"
-
-
-def putInDB(date, city, hour, minutes):
-    pass
+    for name in element['class']:
+        if "more_0" in name:
+            date = name[7:]
+            return date
+    return "-1"
 
 
 def getPageContent():
+
     URL = "https://www.oref.org.il/12481-he/Pakar.aspx"
 
     driver = webdriver.Chrome()
@@ -30,14 +37,23 @@ def getPageContent():
     #elements = results.find_all("div", {"class": "alertDetails more_1_28_10_2023 hdn"})
     elements = results.find_all('div', attrs={'class': lambda e: e.startswith('alertDetails') if e else False})
 
+    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'w+', encoding='UTF8')
+    writer = csv.writer(file)
+    header = ['date', 'city', 'hour', 'minutes']
+    writer.writerow(header)
+
     for element in elements:
         text = element.find("h5")
         citiesNames = text.next_sibling
         time = text.text
 
-        citiesList = extractListFromString(citiesNames)
         date = findDate(element)
-        
+        if date == "-1":
+            print("There is no date!")
+            continue
+
+        citiesList = extractListFromString(citiesNames)
+
         splitTime = time.split(":")
         if len(splitTime) == 2:
             hour = splitTime[0]
@@ -45,11 +61,15 @@ def getPageContent():
         else:
             print("Something went wrong with the time extraction")
             continue
-        
+
+        print(f'{date}  -  {citiesList}, {hour}:{minutes}')
+
         for city in citiesList:
-            putInDB(date, city, hour, minutes)
+            row = [date, city, hour, minutes]
+            writer.writerow(row)
 
 
+    file.close()
 
 
 
