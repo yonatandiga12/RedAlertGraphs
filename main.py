@@ -4,6 +4,10 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+DATE_INDEX = 0
+CITY_INDEX = 1
+HOUR_INDEX = 2
+MINUTES_INDEX = 3
 
 def extractListFromString(citiesNames):
     #for cityArea in citiesNames.split(", "):
@@ -24,8 +28,26 @@ def findDate(element):
     #text = parent.next_sibling.text
     text = parent.previous_sibling.text
     if text is None:
-        print('Hi')
+        print('Date not found')
+        return "-1"
     return text[-10:]
+
+
+#This function writes all the history to the DB
+def writeToDB(rowsToSave):
+    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'w', encoding='UTF8')
+    writer = csv.writer(file)
+    header = ['date', 'city', 'hour', 'minutes']
+    writer.writerow(header)
+
+    for row in reversed(rowsToSave):
+        writer.writerow(row)
+
+    newestDate = f'{rowsToSave[0][DATE_INDEX]} - {rowsToSave[0][HOUR_INDEX]}:{rowsToSave[0][MINUTES_INDEX]}'
+
+    print(f'Done!, added until date and time {newestDate}')
+
+    file.close()
 
 
 def getPageContent():
@@ -42,11 +64,7 @@ def getPageContent():
 
     elements = results.find_all('div', attrs={'class': lambda e: e.startswith('alertDetails') if e else False})
 
-    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'w+', encoding='UTF8')
-    writer = csv.writer(file)
-    header = ['date', 'city', 'hour', 'minutes']
-    writer.writerow(header)
-
+    rowsToSave = list()
 
     for element in elements:
         text = element.find("h5")
@@ -68,14 +86,18 @@ def getPageContent():
             print("Something went wrong with the time extraction")
             continue
 
-        print(f'{date}  -  {citiesList}, {hour}:{minutes}')
+        #print(f'{date}  -  {citiesList}, {hour}:{minutes}')
 
         for city in citiesList:
             row = [date, city, hour, minutes]
-            writer.writerow(row)
+            rowsToSave.append(row)
+
+    #Create another function to add rows to DB without deleting all the previous data!
+    #just check what is the last date and hour inserted to the csv file and put the new data until this moment.
+
+    writeToDB(rowsToSave)
 
 
-    file.close()
 
 
 
