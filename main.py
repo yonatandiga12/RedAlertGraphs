@@ -15,11 +15,17 @@ def extractListFromString(citiesNames):
 
 
 def findDate(element):
-    for name in element['class']:
-        if "more_0" in name:
-            date = name[7:]
-            return date
-    return "-1"
+    # for name in element['class']:
+    #     if "more_0" in name:
+    #         date = name[7:]
+    #         return date
+    # return "-1"
+    parent = element.find_parent('div', class_='alert_table alert_type_1 no_bottom_border')
+    #text = parent.next_sibling.text
+    text = parent.previous_sibling.text
+    if text is None:
+        print('Hi')
+    return text[-10:]
 
 
 def getPageContent():
@@ -34,7 +40,6 @@ def getPageContent():
     results = soup.find(id="ahNotifications")
     #print(results.prettify())
 
-    #elements = results.find_all("div", {"class": "alertDetails more_1_28_10_2023 hdn"})
     elements = results.find_all('div', attrs={'class': lambda e: e.startswith('alertDetails') if e else False})
 
     file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'w+', encoding='UTF8')
@@ -42,15 +47,16 @@ def getPageContent():
     header = ['date', 'city', 'hour', 'minutes']
     writer.writerow(header)
 
+
     for element in elements:
         text = element.find("h5")
         citiesNames = text.next_sibling
         time = text.text
 
         date = findDate(element)
-        if date == "-1":
-            print("There is no date!")
-            continue
+        # if date == "-1":
+        #     print("There is no date!")
+        #     continue
 
         citiesList = extractListFromString(citiesNames)
 
