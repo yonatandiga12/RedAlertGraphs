@@ -38,29 +38,37 @@ def findDate(element, lastDate, lastHour, lastMinute, time):
                          f'Please enter the date of the alarm.:')
             return date, hour, minutes
 
+
     text = parent.previous_sibling.text
     if text is None:
         print('Date not found')
-        return "-1"
+        return lastDate, hour, minutes
 
-    return text[-10:], hour, minutes
+    dateFound = text[-10:]
+    for letter in dateFound:  #check if the date is valid, should be without letters!
+        if letter not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]:
+            return lastDate, hour, minutes
+    return dateFound, hour, minutes
+
+def firstSettingsToDB():
+    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'a', encoding='UTF8')
+    writer = csv.writer(file)
+    #header = ['date', 'city', 'hour', 'minutes']
+    #writer.writerow(header)
+    writer.writerow([])
+    return file, writer
 
 
 #This function writes all the history to the DB
-def writeToDB(rowsToSave):
-    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'w', encoding='UTF8')
-    writer = csv.writer(file)
-    header = ['date', 'city', 'hour', 'minutes']
-    writer.writerow(header)
+def writeToDB(rowsToSave, file, writer):
 
-    for row in reversed(rowsToSave):
+    for row in rowsToSave:
         writer.writerow(row)
 
     newestDate = f'{rowsToSave[0][DATE_INDEX]} - {rowsToSave[0][HOUR_INDEX]}:{rowsToSave[0][MINUTES_INDEX]}'
 
     print(f'Done!, added until date and time {newestDate}')
 
-    file.close()
 
 
 def getPageContent():
@@ -73,7 +81,7 @@ def getPageContent():
     #driver.find("li", {"id": "lastweek"}).click()
     driver.find_element(By.ID, 'lastweek')
     #driver.find_element_by_id('lastweek').click()
-    sleep(10)
+    sleep(20)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     driver.close()
@@ -87,6 +95,7 @@ def getPageContent():
     lastDate = ""
     lastHour = ""
     lastMinute = ""
+    file, writer = firstSettingsToDB()
 
     for element in elements:
         text = element.find("h5")
@@ -97,6 +106,10 @@ def getPageContent():
 
         lastMinute = minutes
         lastHour = hour
+        if lastDate != date and len(rowsToSave) > 0:
+            writeToDB(rowsToSave, file, writer)
+            rowsToSave = list()
+
         lastDate = date
 
         citiesList = extractListFromString(citiesNames)
@@ -108,8 +121,10 @@ def getPageContent():
     #Create another function to add rows to DB without deleting all the previous data!
     #just check what is the last date and hour inserted to the csv file and put the new data until this moment.
 
-    writeToDB(rowsToSave)
+    if len(rowsToSave) > 0:
+        writeToDB(rowsToSave, file, writer)
 
+    file.close()
 
 
 
