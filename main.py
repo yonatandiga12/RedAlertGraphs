@@ -1,8 +1,10 @@
 import csv
+from time import sleep
 
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 DATE_INDEX = 0
 CITY_INDEX = 1
@@ -18,19 +20,30 @@ def extractListFromString(citiesNames):
     return result
 
 
-def findDate(element):
-    # for name in element['class']:
-    #     if "more_0" in name:
-    #         date = name[7:]
-    #         return date
-    # return "-1"
+def findDate(element, lastDate, lastHour, lastMinute, time):
     parent = element.find_parent('div', class_='alert_table alert_type_1 no_bottom_border')
     #text = parent.next_sibling.text
+
+    splitTime = time.split(":")
+    hour = splitTime[0]
+    minutes = splitTime[1]
+
+    #If no date:
+    if parent is None:
+        if hour <= lastHour:
+            return lastDate, hour, minutes
+        else:  #Ask the user to enter the date
+            date = input(f'\nLast valid time is : {lastDate}, {lastHour}:{lastMinute}.\n'
+                         f'Curr time of the alarm is : {hour}:{minutes}.\n'
+                         f'Please enter the date of the alarm.:')
+            return date, hour, minutes
+
     text = parent.previous_sibling.text
     if text is None:
         print('Date not found')
         return "-1"
-    return text[-10:]
+
+    return text[-10:], hour, minutes
 
 
 #This function writes all the history to the DB
@@ -56,6 +69,12 @@ def getPageContent():
 
     driver = webdriver.Chrome()
     driver.get(URL)
+
+    #driver.find("li", {"id": "lastweek"}).click()
+    driver.find_element(By.ID, 'lastweek')
+    #driver.find_element_by_id('lastweek').click()
+    sleep(10)
+
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     driver.close()
 
@@ -65,28 +84,22 @@ def getPageContent():
     elements = results.find_all('div', attrs={'class': lambda e: e.startswith('alertDetails') if e else False})
 
     rowsToSave = list()
+    lastDate = ""
+    lastHour = ""
+    lastMinute = ""
 
     for element in elements:
         text = element.find("h5")
         citiesNames = text.next_sibling
         time = text.text
 
-        date = findDate(element)
-        # if date == "-1":
-        #     print("There is no date!")
-        #     continue
+        date, hour, minutes = findDate(element, lastDate, lastHour, lastMinute, time)
+
+        lastMinute = minutes
+        lastHour = hour
+        lastDate = date
 
         citiesList = extractListFromString(citiesNames)
-
-        splitTime = time.split(":")
-        if len(splitTime) == 2:
-            hour = splitTime[0]
-            minutes = splitTime[1]
-        else:
-            print("Something went wrong with the time extraction")
-            continue
-
-        #print(f'{date}  -  {citiesList}, {hour}:{minutes}')
 
         for city in citiesList:
             row = [date, city, hour, minutes]
