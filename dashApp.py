@@ -61,7 +61,7 @@ def create_app():
                                                                                    'font-size': '130%'}),
                 html.Div(id='graph-container')
             ]),
-            dcc.Tab(label='Alarms per Minute in several Dates/all dates (I need to choose)', children=[
+            dcc.Tab(label='Alarms per Minute in several Dates/all dates (I need to choose.)', children=[
                 html.Label('Select Date for Tab 2:'),
                 # dcc.DatePickerSingle(
                 #     id='date-picker-tab2',
