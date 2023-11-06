@@ -32,18 +32,51 @@ def create_app():
     df = load_and_preprocess_data()
 
     # Define the layout of the app
+    # app.layout = html.Div([
+    #     html.Label('Select Date:'),
+    #     dcc.DatePickerSingle(
+    #         id='date-picker',
+    #         min_date_allowed=df['datetime'].min(),
+    #         max_date_allowed=df['datetime'].max(),
+    #         initial_visible_month=df['datetime'].min(),
+    #         date=df['datetime'].min().date()
+    #     ),
+    #     html.Button('Update Graph', id='update-button', n_clicks=0),
+    #     html.Div(id='graph-container')
+    # ])
+
     app.layout = html.Div([
-        html.Label('Select Date:'),
-        dcc.DatePickerSingle(
-            id='date-picker',
-            min_date_allowed=df['datetime'].min(),
-            max_date_allowed=df['datetime'].max(),
-            initial_visible_month=df['datetime'].min(),
-            date=df['datetime'].min().date()
-        ),
-        html.Button('Update Graph', id='update-button', n_clicks=0),
-        html.Div(id='graph-container')
+        dcc.Tabs([
+            dcc.Tab(label='Alarms per Hour in a single day', children=[
+                html.Label('Select Date to display:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                dcc.DatePickerSingle(
+                    id='date-picker',
+                    min_date_allowed=df['datetime'].min(),
+                    max_date_allowed=df['datetime'].max(),
+                    initial_visible_month=df['datetime'].min(),
+                    date=df['datetime'].min().date(),
+                    style={'margin-left': '10px'}
+                ),
+                html.Button('Update Graph', id='update-button', n_clicks=0, style={'margin-left': '10px',
+                                                                                   'font-size': '130%'}),
+                html.Div(id='graph-container')
+            ]),
+            dcc.Tab(label='Alarms per Minute in several Dates/all dates (I need to choose)', children=[
+                html.Label('Select Date for Tab 2:'),
+                # dcc.DatePickerSingle(
+                #     id='date-picker-tab2',
+                #     min_date_allowed=df['datetime'].min(),
+                #     max_date_allowed=df['datetime'].max(),
+                #     initial_visible_month=df['datetime'].min(),
+                #     date=df['datetime'].min().date()
+                # ),
+                # html.Button('Update Graph', id='update-button-tab2', n_clicks=0),
+                # html.Div(id='graph-container-tab2')
+            ]),
+        ])
     ])
+
+
 
     # Define the callback to update the graph based on user input
     @app.callback(
