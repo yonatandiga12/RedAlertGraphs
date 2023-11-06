@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from dashApp import startApp
+
 DATE_INDEX = 0
 CITY_INDEX = 1
 HOUR_INDEX = 2
@@ -54,7 +56,7 @@ def findDate(element, lastDate, lastHour, lastMinute, time):
 
 
 def firstSettingsToDB():
-    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csvFile', 'a', encoding='UTF8')
+    file = open('C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csv\\csvFile', 'a', encoding='UTF8')
     writer = csv.writer(file)
     # header = ['date', 'city', 'hour', 'minutes']
     # writer.writerow(header)
@@ -197,7 +199,8 @@ def hoursHist(cursor):
 
 def plotGraphs():
     try:
-        sqliteConnection = sqlite3.connect('alerts.db')
+        #sqliteConnection = sqlite3.connect('alerts.db')
+        sqliteConnection = sqlite3.connect('csv\\alerts.db')
         cursor = sqliteConnection.cursor()
         print("Connected to SQLite")
 
@@ -218,4 +221,5 @@ def plotGraphs():
 
 if __name__ == "__main__":
     # getPageContent()
-    plotGraphs()
+    #plotGraphs()
+    startApp()
