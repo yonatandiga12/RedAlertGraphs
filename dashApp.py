@@ -11,18 +11,36 @@ def load_and_preprocess_data():
     df['datetime'] = pd.to_datetime(df['date'], dayfirst=True)
     return df
 
+
 # Function to create the graph
-def create_graph(selected_date, df):
-    selected_data = df[df['datetime'].dt.date == selected_date.date()]
+def create_hours_graph(start_date, end_date, df):
+    selected_data = df[(df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
+    # selected_data = df[df['datetime'].dt.date == selected_date.date()]
     hourly_alert_counts = selected_data.groupby(selected_data['hour'])['city'].count().reset_index()
     hourly_alert_counts.columns = ['Hour', 'Number of Alerts']
     fig = px.bar(hourly_alert_counts, x='Hour', y='Number of Alerts', labels={'Number of Alerts': 'Number of Alerts'},
-                 title=f'Number of Alerts per Hour on {selected_date.date().day}.{selected_date.date().month}')
+                 title=f'Number of Alerts per Hour on {start_date.date().day}.{start_date.date().month} - '
+                       f'{end_date.date().day}.{end_date.date().month}', text='Number of Alerts')
 
     fig.update_xaxes(range=[-0.5, 23.5], tickmode='array', tickvals=list(range(24)))
 
     return fig
 
+
+# Function to create the graph with all minutes displayed on the x-axis
+def create_minute_graph(start_date, end_date, df):
+    filtered_data = df[(df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
+    minute_alert_counts = filtered_data.groupby(filtered_data['minutes'])['city'].count().reset_index()
+    minute_alert_counts.columns = ['Minute', 'Number of Alerts']
+    fig = px.bar(minute_alert_counts, x='Minute', y='Number of Alerts',
+                 labels={'Number of Alerts': 'Number of Alerts'},
+                 title=f'Number of Alerts per Minute between {start_date.date().day}.{start_date.date().month} - '
+                       f'{end_date.date().day}.{end_date.date().month}', text='Number of Alerts')
+
+    # Set fixed x-axis range from 0 to 59 (60 minutes) and show all numbers for minutes
+    fig.update_xaxes(range=[-0.5, 59.5], tickmode='array', tickvals=list(range(60)))
+
+    return fig
 
 
 # Function to create the Dash app
@@ -31,62 +49,89 @@ def create_app():
 
     df = load_and_preprocess_data()
 
-    # Define the layout of the app
-    # app.layout = html.Div([
-    #     html.Label('Select Date:'),
-    #     dcc.DatePickerSingle(
-    #         id='date-picker',
-    #         min_date_allowed=df['datetime'].min(),
-    #         max_date_allowed=df['datetime'].max(),
-    #         initial_visible_month=df['datetime'].min(),
-    #         date=df['datetime'].min().date()
-    #     ),
-    #     html.Button('Update Graph', id='update-button', n_clicks=0),
-    #     html.Div(id='graph-container')
-    # ])
-
     app.layout = html.Div([
         dcc.Tabs([
             dcc.Tab(label='Alarms per Hour in a single day', children=[
-                html.Label('Select Date to display:', style={'font-weight': 'bold', 'font-size': '150%'}),
-                dcc.DatePickerSingle(
-                    id='date-picker',
-                    min_date_allowed=df['datetime'].min(),
-                    max_date_allowed=df['datetime'].max(),
-                    initial_visible_month=df['datetime'].min(),
-                    date=df['datetime'].min().date(),
-                    style={'margin-left': '10px'}
-                ),
+                html.Div([
+                    html.Label('Select Start Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='start-date-picker',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].min().date(),
+                        style={'margin-left': '10px'}
+                    ),
+                ]),
+                html.Div([
+                    html.Label('Select End Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='end-date-picker',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].max().date(),
+                        style={'margin-left': '20px'}
+                    ),
+                ]),
                 html.Button('Update Graph', id='update-button', n_clicks=0, style={'margin-left': '10px',
                                                                                    'font-size': '130%'}),
                 html.Div(id='graph-container')
             ]),
-            dcc.Tab(label='Alarms per Minute in several Dates/all dates (I need to choose.)', children=[
-                html.Label('Select Date for Tab 2:'),
-                # dcc.DatePickerSingle(
-                #     id='date-picker-tab2',
-                #     min_date_allowed=df['datetime'].min(),
-                #     max_date_allowed=df['datetime'].max(),
-                #     initial_visible_month=df['datetime'].min(),
-                #     date=df['datetime'].min().date()
-                # ),
-                # html.Button('Update Graph', id='update-button-tab2', n_clicks=0),
-                # html.Div(id='graph-container-tab2')
+            dcc.Tab(label='Alarms per Minute in several dates ', children=[
+                html.Div([
+                    html.Label('Select Start Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='start-date-picker-minute',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].min().date(),
+                        style={'margin-left': '10px'}
+                    ),
+                ]),
+                html.Div([
+                    html.Label('Select End Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='end-date-picker-minute',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].max().date(),
+                        style={'margin-left': '20px'}
+                    ),
+                ]),
+                html.Button('Update Graph', id='update-button-minute', n_clicks=0, style={'margin-left': '10px',
+                                                                                          'font-size': '130%'}),
+                html.Div(id='graph-container-minute')
+            ]),
+            dcc.Tab(label='Alarms per city in several dates ', children=[
             ]),
         ])
     ])
-
-
 
     # Define the callback to update the graph based on user input
     @app.callback(
         dash.dependencies.Output('graph-container', 'children'),
         [dash.dependencies.Input('update-button', 'n_clicks')],
-        [dash.dependencies.State('date-picker', 'date')]
+        [dash.dependencies.State('start-date-picker', 'date'),
+         dash.dependencies.State('end-date-picker', 'date')]
     )
-    def update_graph_callback(n_clicks, selected_date):
+    def update_graph_callback(n_clicks, start_date, end_date):
         if n_clicks > 0:
-            fig = create_graph(pd.to_datetime(selected_date), df)
+            fig = create_hours_graph(pd.to_datetime(start_date), pd.to_datetime(end_date), df)
+            return dcc.Graph(figure=fig)
+
+    # Define callback for Minute-Level Graph tab
+    @app.callback(
+        dash.dependencies.Output('graph-container-minute', 'children'),
+        [dash.dependencies.Input('update-button-minute', 'n_clicks')],
+        [dash.dependencies.State('start-date-picker-minute', 'date'),
+         dash.dependencies.State('end-date-picker-minute', 'date')]
+    )
+    def update_minute_graph_callback(n_clicks, start_date, end_date):
+        if n_clicks > 0:
+            fig = create_minute_graph(pd.to_datetime(start_date), pd.to_datetime(end_date), df)
             return dcc.Graph(figure=fig)
 
     return app
