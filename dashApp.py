@@ -29,8 +29,6 @@ def create_hours_graph(start_date, end_date, df):
 
 # Function to create the graph with all minutes displayed on the x-axis
 def create_minute_graph(start_date, end_date, df):
-    print("Minutes")
-    print(type(start_date))
     filtered_data = df[(df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
     minute_alert_counts = filtered_data.groupby(filtered_data['minutes'])['city'].count().reset_index()
     minute_alert_counts.columns = ['Minute', 'Number of Alerts']
@@ -46,8 +44,6 @@ def create_minute_graph(start_date, end_date, df):
 
 
 def create_cities_graph(start_date, end_date, df, selected_cities):
-    print("Cities")
-    print(type(start_date))
     filtered_data = df[(df['city'].isin(selected_cities)) &
                        (df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
 
