@@ -29,6 +29,8 @@ def create_hours_graph(start_date, end_date, df):
 
 # Function to create the graph with all minutes displayed on the x-axis
 def create_minute_graph(start_date, end_date, df):
+    print("Minutes")
+    print(type(start_date))
     filtered_data = df[(df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
     minute_alert_counts = filtered_data.groupby(filtered_data['minutes'])['city'].count().reset_index()
     minute_alert_counts.columns = ['Minute', 'Number of Alerts']
@@ -43,11 +45,31 @@ def create_minute_graph(start_date, end_date, df):
     return fig
 
 
+def create_cities_graph(start_date, end_date, df, selected_cities):
+    print("Cities")
+    print(type(start_date))
+    filtered_data = df[(df['city'].isin(selected_cities)) &
+                       (df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
+
+    #date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date)['datetime'].count().reset_index()
+    date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date).size().reset_index(name='Number of Alerts')
+
+    date_alert_counts.columns = ['Date', 'Number of Alerts']
+    fig = px.bar(date_alert_counts, x='Date', y='Number of Alerts',
+                 labels={'Number of Alerts': 'Number of Alerts'},
+                 title=f'Number of Alerts in selected cities between {start_date.date().day}.{start_date.date().month} - '
+                       f'{end_date.date().day}.{end_date.date().month}', text='Number of Alerts')
+
+    return fig
+
+
 # Function to create the Dash app
 def create_app():
     app = dash.Dash(__name__)
 
     df = load_and_preprocess_data()
+
+    city_options = [{'label': city, 'value': city} for city in df['city'].unique()]
 
     app.layout = html.Div([
         dcc.Tabs([
@@ -76,7 +98,7 @@ def create_app():
                 ]),
                 html.Button('Update Graph', id='update-button', n_clicks=0, style={'margin-left': '10px',
                                                                                    'font-size': '130%'}),
-                html.Div(id='graph-container')
+                html.Div(id='graph-container-hour')
             ]),
             dcc.Tab(label='Alarms per Minute in several dates ', children=[
                 html.Div([
@@ -105,14 +127,46 @@ def create_app():
                                                                                           'font-size': '130%'}),
                 html.Div(id='graph-container-minute')
             ]),
-            dcc.Tab(label='Alarms per city in several dates ', children=[
+            dcc.Tab(label='Alarms per city in several dates', children=[
+                html.Div([
+                    html.Label('Select Start Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='start-date-picker-city',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].min().date(),  # Ensure it's a datetime.date object
+                        style={'margin-left': '10px'}
+                    ),
+                    html.Label('Select End Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='end-date-picker-city',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].max().date(),  # Ensure it's a datetime.date object
+                        style={'margin-left': '20px'}
+                    ),
+                    html.Label('Select Cities:',
+                               style={'font-weight': 'bold', 'font-size': '150%', 'margin-top': '20px'}),
+                    dcc.Dropdown(
+                        id='city-dropdown',
+                        options=city_options,
+                        multi=True,  # Allow multiple city selection
+                        searchable=True,
+                        style={'width': '50%'}
+                    ),
+                    html.Button('Update Graph', id='update-button-city', n_clicks=0, style={'margin-left': '10px',
+                                                                                            'font-size': '130%'}),
+                    html.Div(id='graph-container-city')
+                ])
             ]),
         ])
     ])
 
     # Define the callback to update the graph based on user input
     @app.callback(
-        dash.dependencies.Output('graph-container', 'children'),
+        dash.dependencies.Output('graph-container-hour', 'children'),
         [dash.dependencies.Input('update-button', 'n_clicks')],
         [dash.dependencies.State('start-date-picker', 'date'),
          dash.dependencies.State('end-date-picker', 'date')]
@@ -133,6 +187,21 @@ def create_app():
         if n_clicks > 0:
             fig = create_minute_graph(pd.to_datetime(start_date), pd.to_datetime(end_date), df)
             return dcc.Graph(figure=fig)
+
+    # Define callback for Date-Level Graph tab
+    @app.callback(
+        dash.dependencies.Output('graph-container-city', 'children'),
+        [dash.dependencies.Input('update-button-city', 'n_clicks')],
+        [dash.dependencies.State('city-dropdown', 'value'),
+         dash.dependencies.State('start-date-picker-city', 'date'),
+         dash.dependencies.State('end-date-picker-city', 'date')]
+    )
+    def update_date_graph_callback(n_clicks, selected_cities, start_date, end_date):
+        if n_clicks > 0:
+
+            fig = create_cities_graph(pd.to_datetime(start_date), pd.to_datetime(end_date), df, selected_cities)
+            return dcc.Graph(figure=fig)
+
 
     return app
 
