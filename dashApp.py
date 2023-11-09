@@ -51,7 +51,6 @@ def create_cities_graph(start_date, end_date, df, selected_cities):
     filtered_data = df[(df['city'].isin(selected_cities)) &
                        (df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
 
-    #date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date)['datetime'].count().reset_index()
     date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date).size().reset_index(name='Number of Alerts')
 
     date_alert_counts.columns = ['Date', 'Number of Alerts']
@@ -135,31 +134,37 @@ def create_app():
                         min_date_allowed=df['datetime'].min(),
                         max_date_allowed=df['datetime'].max(),
                         initial_visible_month=df['datetime'].min(),
-                        date=df['datetime'].min().date(),  # Ensure it's a datetime.date object
+                        date=df['datetime'].min().date(),
                         style={'margin-left': '10px'}
                     ),
+                ]),
+                html.Div([
                     html.Label('Select End Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
                     dcc.DatePickerSingle(
                         id='end-date-picker-city',
                         min_date_allowed=df['datetime'].min(),
                         max_date_allowed=df['datetime'].max(),
                         initial_visible_month=df['datetime'].min(),
-                        date=df['datetime'].max().date(),  # Ensure it's a datetime.date object
+                        date=df['datetime'].max().date(),
                         style={'margin-left': '20px'}
                     ),
+                ]),
+                html.Div([
                     html.Label('Select Cities:',
                                style={'font-weight': 'bold', 'font-size': '150%', 'margin-top': '20px'}),
                     dcc.Dropdown(
                         id='city-dropdown',
                         options=city_options,
-                        multi=True,  # Allow multiple city selection
+                        multi=True,
                         searchable=True,
                         style={'width': '50%'}
                     ),
-                    html.Button('Update Graph', id='update-button-city', n_clicks=0, style={'margin-left': '10px',
-                                                                                            'font-size': '130%'}),
-                    html.Div(id='graph-container-city')
-                ])
+                ]),
+                html.Div([
+                    html.Button('Update Graph', id='update-button-city', n_clicks=0,
+                                style={'margin-left': '10px', 'margin-top': '10px', 'font-size': '130%'}),
+                ]),
+                html.Div(id='graph-container-city')
             ]),
         ])
     ])
