@@ -220,6 +220,6 @@ def plotGraphs():
 
 
 if __name__ == "__main__":
-    # getPageContent()
+    getPageContent()
     #plotGraphs()
-    startApp()
+    #startApp()
