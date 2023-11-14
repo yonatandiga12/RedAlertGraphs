@@ -47,7 +47,8 @@ def create_cities_graph(start_date, end_date, df, selected_cities):
     filtered_data = df[(df['city'].isin(selected_cities)) &
                        (df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
 
-    date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date).size().reset_index(name='Number of Alerts')
+    date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date).size().reset_index(
+        name='Number of Alerts')
 
     date_alert_counts.columns = ['Date', 'Number of Alerts']
     fig = px.bar(date_alert_counts, x='Date', y='Number of Alerts',
@@ -162,6 +163,33 @@ def create_app():
                 ]),
                 html.Div(id='graph-container-city')
             ]),
+            dcc.Tab(label='Alarms in All Cities', children=[
+                html.Div([
+                    html.Label('Select Start Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='start-date-picker-all-cities',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].min().date(),
+                        style={'margin-left': '10px'}
+                    ),
+                ]),
+                html.Div([
+                    html.Label('Select End Date:', style={'font-weight': 'bold', 'font-size': '150%'}),
+                    dcc.DatePickerSingle(
+                        id='end-date-picker-all-cities',
+                        min_date_allowed=df['datetime'].min(),
+                        max_date_allowed=df['datetime'].max(),
+                        initial_visible_month=df['datetime'].min(),
+                        date=df['datetime'].max().date(),
+                        style={'margin-left': '20px'}
+                    ),
+                ]),
+                html.Button('Update Graph', id='update-button-all-cities', n_clicks=0,
+                            style={'margin-left': '10px', 'font-size': '130%'}),
+                html.Div(id='graph-container-all-cities')
+            ])
         ])
     ])
 
@@ -199,10 +227,34 @@ def create_app():
     )
     def update_date_graph_callback(n_clicks, selected_cities, start_date, end_date):
         if n_clicks > 0:
-
             fig = create_cities_graph(pd.to_datetime(start_date), pd.to_datetime(end_date), df, selected_cities)
             return dcc.Graph(figure=fig)
 
+    # Define the callback to update the graph for the new tab
+    @app.callback(
+        dash.dependencies.Output('graph-container-all-cities', 'children'),
+        [dash.dependencies.Input('update-button-all-cities', 'n_clicks')],
+        [dash.dependencies.State('start-date-picker-all-cities', 'date'),
+         dash.dependencies.State('end-date-picker-all-cities', 'date')]
+    )
+    def update_all_cities_graph_callback(n_clicks, start_date, end_date):
+        start_date = pd.to_datetime(start_date)
+        end_date = pd.to_datetime(end_date)
+        if n_clicks > 0:
+            filtered_data = df[(df['datetime'].dt.date >= start_date) & (df['datetime'].dt.date <= end_date)]
+
+            date_alert_counts = filtered_data.groupby(filtered_data['datetime'].dt.date).size().reset_index(
+                name='Number of Alerts')
+
+            date_alert_counts.columns = ['Date', 'Number of Alerts']
+            fig = px.bar(date_alert_counts, x='Date', y='Number of Alerts',
+                         labels={'Number of Alerts': 'Number of Alerts'},
+                         title=f'Number of Alerts in all cities between {start_date.date().day}.{start_date.date().month} - '
+                               f'{end_date.date().day}.{end_date.date().month}', text='Number of Alerts')
+
+            return dcc.Graph(figure=fig)
+        else:
+            return None
 
     return app
 
