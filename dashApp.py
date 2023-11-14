@@ -3,7 +3,7 @@ import plotly.express as px
 import dash
 from dash import dcc, html
 
-CSV_PATH = './csv/csvUntil81123.csv'
+CSV_PATH = './csv/csvUntil131123.csv'
 
 
 def load_and_preprocess_data():
