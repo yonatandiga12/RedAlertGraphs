@@ -25,3 +25,26 @@ If there is another alarm in 14:01 in Beer Sheva North, it will be saved as a di
 
 
 There may be different numbers in other graphs, depending on the counting system. 
+
+
+
+Graph Examples:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot1.jpg" width="700" title="img1">
+</p>
+<br />  
+<br />  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot2.jpg" width="700" title="img2">
+</p>
+<br />  
+<br />  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot3.jpg" width="700" title="img3">
+</p>
+<br />  
+<br />  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot4.jpg" width="700" title="img4">
+</p>
