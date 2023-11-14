@@ -7,6 +7,7 @@ View Red Alert alarms in graphs, including : alarms per hours, per minute and pe
 1. Run the function getPageContent() from main.
 2. Choose dates from the site
 3. If it asks for a date, write the last date from the dates chosen. It starts from the last date backwards.
+4. Upon finish, Open the csvFile and save a copy as csvUpdated.csv 
 <br />
 
 ## How to view the graphs:
