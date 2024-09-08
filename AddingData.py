@@ -111,7 +111,6 @@ def getPageContentNewWay():
             endingDate = currList[-1]
             dataCurr = fetch_data(startingDate, endingDate)
             if len(dataCurr) > 1990:  #If there were alot of alerts that time
-                #n = 1
                 for oneDate in currList:
                     data1 = fetch_data(oneDate, oneDate)
                     process_data(data1)
