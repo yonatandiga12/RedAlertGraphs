@@ -19,6 +19,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+
+from AddingData import getPageContentNewWay
 ########
 
 
@@ -144,83 +146,78 @@ def getPageContent():
     file.close()
 
 
-def firstSettingsToDB2(name):
-    path = 'C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csv\\newData\\' + name
-    file = open(path, 'a', encoding='UTF8')
-    writer = csv.writer(file)
-    # header = ['date', 'city', 'hour', 'minutes']
-    # writer.writerow(header)
-    writer.writerow([])
-    return file, writer
-
-
-def getPageContentNewWay():
-    # Define the API URL
-
-    #Added data until 15.10 including!
-
-    startingDate = "10.10.2023"
-    endingDate = "15.10.2023"
-    api_url = f"https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={startingDate}&toDate={endingDate}&mode=0 "
-
-    file_rocket, writer_rocket = firstSettingsToDB2('rockets_missiles.csv')
-    file_aircraft, writer_aircraft = firstSettingsToDB2('aircraft_intrusions.csv')
-    file_terrorists, writer_terrorists = firstSettingsToDB2('terrorists_intrusions.csv')
-
-    try:
-        # Fetch the data from the API
-        response = requests.get(api_url)
-        response.raise_for_status()  # Check for request errors
-
-        # Parse the JSON response
-        data = response.json()
-
-        inputStr = input(f'The number of alerts is: {len(data)}, do you wish to stop? ')
-        if len(data) > 1980 or inputStr.lower() == 'p':
-            print("Missing data, choose different dates")
-            return
-
-        # Lists to hold alerts
-        rockets = []
-        aircraft = []
-        terrorists = []
-
-        # Iterate over the items in the JSON response
-        for item in data:
-            date = item.get('date', '')
-            time = item.get('time', '')
-            splittedTime = time.split(':')
-            hour = splittedTime[0]
-            minutes = splittedTime[1]
-            cityName = item.get('data', '')
-            category = item.get('category', '')
-
-            row = [date, cityName, hour, minutes]
-            # Divide data based on category number
-            # Assuming rockets and missiles are category 1, and aircraft penetration is category 2
-            if category == 1:
-                rockets.append(row)
-            elif category == 2:
-                aircraft.append(row)
-            elif category == 10:
-                terrorists.append(row)
-            else:
-                print(f"Unknown category, {item}")
-
-        # Final write for any remaining data
-        if rockets:
-            writeToDB(rockets, file_rocket, writer_rocket)
-
-        if aircraft:
-            writeToDB(aircraft, file_aircraft, writer_aircraft)
-
-        if terrorists:
-            writeToDB(terrorists, file_terrorists, writer_terrorists)
-
-        print("Alerts have been successfully saved into CSV files.")
-
-    except requests.exceptions.RequestException as e:
-        print(f"Failed to fetch alerts: {e}")
+# Moved to a different file
+# def getPageContentNewWay():
+#     # Define the API URL
+#
+#     #Added data until 15.10 including!
+#     #After all is done, replace in the csv file all the " with blank
+#
+#     startingDate = "07.10.2023"
+#     endingDate = "07.10.2023"
+#     api_url = f"https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={startingDate}&toDate={endingDate}&mode=0 "
+#
+#     file_rocket, writer_rocket = firstSettingsToDB2('rockets_missiles.csv')
+#     file_aircraft, writer_aircraft = firstSettingsToDB2('aircraft_intrusions.csv')
+#     file_terrorists, writer_terrorists = firstSettingsToDB2('terrorists_intrusions.csv')
+#
+#     try:
+#         # Fetch the data from the API
+#         response = requests.get(api_url)
+#         response.raise_for_status()  # Check for request errors
+#
+#         # Parse the JSON response
+#         data = response.json()
+#
+#         inputStr = input(f'The number of alerts is: {len(data)}, do you wish to stop? ')
+#         if len(data) > 1980 or inputStr.lower() == 'p':
+#             print("Missing data, choose different dates")
+#             return
+#
+#         # Lists to hold alerts
+#         rockets = []
+#         aircraft = []
+#         terrorists = []
+#
+#         # Iterate over the items in the JSON response
+#         for index in range(len(data) - 1, 0, -1):
+#             item = data[index]
+#             date = item.get('date', '')
+#             timeOfAlarm = item.get('time', '')
+#             splittedTime = timeOfAlarm.split(':')
+#             hour = splittedTime[0]
+#             minutes = splittedTime[1]
+#             cityName = item.get('data', '')
+#             if '"' in cityName:
+#                 print()
+#             category = item.get('category', '')
+#
+#             row = [date, cityName, hour, minutes]
+#             # Divide data based on category number
+#             # Assuming rockets and missiles are category 1, and aircraft penetration is category 2
+#             if category == 1:
+#                 rockets.append(row)
+#             elif category == 2:
+#                 aircraft.append(row)
+#             elif category == 10:
+#                 terrorists.append(row)
+#             else:
+#                 print(f"Unknown category, {item}")
+#
+#         # Final write for any remaining data
+#         if rockets:
+#             writeToDB(rockets, file_rocket, writer_rocket)
+#
+#         if aircraft:
+#             writeToDB(aircraft, file_aircraft, writer_aircraft)
+#
+#         if terrorists:
+#             writeToDB(terrorists, file_terrorists, writer_terrorists)
+#
+#         print("Alerts have been successfully saved into CSV files.")
+#
+#     except requests.exceptions.RequestException as e:
+#         print(f"Failed to fetch alerts: {e}")
 
 
 DATE_COLUMN_NAME = "date"
