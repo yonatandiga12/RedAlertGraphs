@@ -41,8 +41,8 @@ def writeToDB2(rowsToSave, file, writer):
 
 
 def getPageContentNewWay():
-    def fetch_data():
-        api_url = f"https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={start_date.get()}&toDate={end_date.get()}&mode=0"
+    def fetch_data(startDate, endDate):
+        api_url = f"https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={startDate}&toDate={endDate}&mode=0"
         try:
             response = requests.get(api_url)
             response.raise_for_status()
@@ -91,13 +91,32 @@ def getPageContentNewWay():
 
     def on_fetch():
         global data
-        data = fetch_data()
+        data = fetch_data(start_date.get(), end_date.get())
         if data:
             result_label.config(text=f"The number of alerts is: {len(data)}")
             continue_button.pack()
             stop_button.pack()
         else:
             result_label.config(text="Failed to fetch data. Please try again.")
+
+    def on_fromStarting():
+        startingDate = start_date.get()
+        indexOfStart = date_options.index(startingDate)
+        dates = date_options[:indexOfStart+1]
+        dates.reverse()
+        n = 10
+        final = [dates[i * n:(i + 1) * n] for i in range((len(dates) + n - 1) // n)]
+        for currList in final:
+            startingDate = currList[0]
+            endingDate = currList[-1]
+            dataCurr = fetch_data(startingDate, endingDate)
+            if len(dataCurr) > 1990:  #If there were alot of alerts that time
+                #n = 1
+                for oneDate in currList:
+                    data1 = fetch_data(oneDate, oneDate)
+                    process_data(data1)
+            else:
+                process_data(dataCurr)
 
     def on_continue():
         process_data(data)
@@ -127,6 +146,9 @@ def getPageContentNewWay():
 
     fetch_button = tk.Button(root, text="Fetch Data", command=on_fetch)
     fetch_button.pack()
+
+    fromStartingDateUntilNow_button = tk.Button(root, text="From Starting Date Until Now", command=on_fromStarting)
+    fromStartingDateUntilNow_button.pack()
 
     result_label = tk.Label(root, text="")
     result_label.pack()
