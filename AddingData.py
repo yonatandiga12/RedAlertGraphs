@@ -12,6 +12,14 @@ HOUR_INDEX = 2
 MINUTES_INDEX = 3
 
 
+def extractListFromString(citiesNames):
+    # for cityArea in citiesNames.split(", "):
+    #    city = cityArea.split("-")
+    #    print(city[0])
+
+    result = set([cityArea.split("-")[0].strip() for cityArea in citiesNames.split(", ")])
+    return result
+
 def firstSettingsToDB2(name):
     path = 'C:\\Fun projects\\RedAlert\\RedAlertGraphs\\csv\\newData\\' + name
     file = open(path, 'a', encoding='UTF8')
@@ -59,18 +67,18 @@ def getPageContentNewWay():
             splittedTime = timeOfAlarm.split(':')
             hour = splittedTime[0]
             minutes = splittedTime[1]
-            cityName = item.get('data', '')
+            cities = extractListFromString(item.get('data', ''))
             category = item.get('category', '')
-
-            row = [date, cityName, hour, minutes]
-            if category == 1:
-                rockets.append(row)
-            elif category == 2:
-                aircraft.append(row)
-            elif category == 10:
-                terrorists.append(row)
-            else:
-                print(f"Unknown category, {item}")
+            for cityName in cities:
+                row = [date, cityName, hour, minutes]
+                if category == 1:
+                    rockets.append(row)
+                elif category == 2:
+                    aircraft.append(row)
+                elif category == 10:
+                    terrorists.append(row)
+                else:
+                    print(f"Unknown category, {item}")
 
         if rockets:
             writeToDB2(rockets, file_rocket, writer_rocket)
