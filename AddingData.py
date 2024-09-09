@@ -1,3 +1,5 @@
+import sqlite3
+
 import csv
 import tkinter as tk
 from tkinter import ttk
@@ -11,6 +13,15 @@ CITY_INDEX = 1
 HOUR_INDEX = 2
 MINUTES_INDEX = 3
 
+PATH_TO_DB = 'csv\\newData\\'
+DB_NAME = 'alerts.db'
+TERRORISTS_TABLE_NAME = 'terrorists'
+ROCKETS_TABLE_NAME = 'missiles'
+AIRCRAFT_TABLE_NAME = 'aircraft'
+SQL_DATE_COLUMN_NAME = 'dates'
+SQL_HOUR_COLUMN_NAME = 'hour'
+SQL_MINUTES_COLUMN_NAME = 'minutes'
+SQL_CITY_COLUMN_NAME = 'city'
 
 def extractListFromString(citiesNames):
     # for cityArea in citiesNames.split(", "):
@@ -40,6 +51,19 @@ def writeToDB2(rowsToSave, file, writer):
     print(f'Done!, added until date and time {newestDate}')
 
 
+def writeSQLToDB(cursor, listOfRows, tableName):
+    for currRow in listOfRows:
+        currDate = currRow[DATE_INDEX]
+        cityName = currRow[CITY_INDEX]
+        hour = currRow[HOUR_INDEX]
+        minutes = currRow[MINUTES_INDEX]
+        # Insert a new row into the table
+        cursor.execute(f'''
+            INSERT INTO {tableName} ({SQL_DATE_COLUMN_NAME}, {SQL_CITY_COLUMN_NAME},
+            {SQL_HOUR_COLUMN_NAME}, {SQL_MINUTES_COLUMN_NAME}) VALUES (?, ?, ?, ?)''',
+                       (currDate, cityName, hour, minutes))
+
+
 def getPageContentNewWay():
     def fetch_data(startDate, endDate):
         api_url = f"https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={startDate}&toDate={endDate}&mode=0"
@@ -51,10 +75,16 @@ def getPageContentNewWay():
             print(f"Failed to fetch alerts: {e}")
             return None
 
-    def process_data(data):
-        file_rocket, writer_rocket = firstSettingsToDB2('rockets_missiles.csv')
-        file_aircraft, writer_aircraft = firstSettingsToDB2('aircraft_intrusions.csv')
-        file_terrorists, writer_terrorists = firstSettingsToDB2('terrorists_intrusions.csv')
+    def process_data(data, CSVFlag=False):
+        if CSVFlag:
+            #This is for entering the data to the CSV
+            file_rocket, writer_rocket = firstSettingsToDB2('rockets_missiles.csv')
+            file_aircraft, writer_aircraft = firstSettingsToDB2('aircraft_intrusions.csv')
+            file_terrorists, writer_terrorists = firstSettingsToDB2('terrorists_intrusions.csv')
+        else:
+            # Connect to the SQLite database (or create it if it doesn't exist)
+            conn = sqlite3.connect(PATH_TO_DB + DB_NAME)  # Replace with your database file or connection string
+            cursor = conn.cursor()
 
         rockets = []
         aircraft = []
@@ -80,14 +110,27 @@ def getPageContentNewWay():
                 else:
                     print(f"Unknown category, {item}")
 
-        if rockets:
-            writeToDB2(rockets, file_rocket, writer_rocket)
-        if aircraft:
-            writeToDB2(aircraft, file_aircraft, writer_aircraft)
-        if terrorists:
-            writeToDB2(terrorists, file_terrorists, writer_terrorists)
+        if CSVFlag:
+            if rockets:
+                writeToDB2(rockets, file_rocket, writer_rocket)
+            if aircraft:
+                writeToDB2(aircraft, file_aircraft, writer_aircraft)
+            if terrorists:
+                writeToDB2(terrorists, file_terrorists, writer_terrorists)
+        else:
+            if rockets:
+                writeSQLToDB(cursor, rockets, ROCKETS_TABLE_NAME)
+            if aircraft:
+                writeSQLToDB(cursor, aircraft, AIRCRAFT_TABLE_NAME)
+            if terrorists:
+                writeSQLToDB(cursor, terrorists, TERRORISTS_TABLE_NAME)
+        if not CSVFlag:
+            # Commit the changes and close the connection
+            conn.commit()
+            conn.close()
+            print("Alerts have been successfully saved into the DB.")
 
-        print("Alerts have been successfully saved into CSV files.")
+
 
     def on_fetch():
         global data

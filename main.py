@@ -91,59 +91,59 @@ def writeToDB(rowsToSave, file, writer):
 
 
 
-def getPageContent():
-    URL = "https://www.oref.org.il/12481-he/Pakar.aspx"
-
-    driver = webdriver.Chrome()
-    driver.get(URL)
-
-    # driver.find("li", {"id": "lastweek"}).click()
-    driver.find_element(By.ID, 'lastweek')
-    # driver.find_element_by_id('lastweek').click()
-    #sleep(20)
-
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    driver.close()
-
-    results = soup.find(id="ahNotifications")
-    # print(results.prettify())
-
-    elements = results.find_all('div', attrs={'class': lambda e: e.startswith('alertDetails') if e else False})
-
-    rowsToSave = list()
-    lastDate = ""
-    lastHour = ""
-    lastMinute = ""
-    file, writer = firstSettingsToDB()
-
-    for element in elements:
-        text = element.find("h5")
-        citiesNames = text.next_sibling
-        time = text.text
-
-        date, hour, minutes = findDate(element, lastDate, lastHour, lastMinute, time)
-
-        lastMinute = minutes
-        lastHour = hour
-        if lastDate != date and len(rowsToSave) > 0:
-            writeToDB(rowsToSave, file, writer)
-            rowsToSave = list()
-
-        lastDate = date
-
-        citiesList = extractListFromString(citiesNames)
-
-        for city in citiesList:
-            row = [date, city, hour, minutes]
-            rowsToSave.append(row)
-
-    # Create another function to add rows to DB without deleting all the previous data!
-    # just check what is the last date and hour inserted to the csv file and put the new data until this moment.
-
-    if len(rowsToSave) > 0:
-        writeToDB(rowsToSave, file, writer)
-
-    file.close()
+# def getPageContent():
+#     URL = "https://www.oref.org.il/12481-he/Pakar.aspx"
+#
+#     driver = webdriver.Chrome()
+#     driver.get(URL)
+#
+#     # driver.find("li", {"id": "lastweek"}).click()
+#     driver.find_element(By.ID, 'lastweek')
+#     # driver.find_element_by_id('lastweek').click()
+#     #sleep(20)
+#
+#     soup = BeautifulSoup(driver.page_source, 'html.parser')
+#     driver.close()
+#
+#     results = soup.find(id="ahNotifications")
+#     # print(results.prettify())
+#
+#     elements = results.find_all('div', attrs={'class': lambda e: e.startswith('alertDetails') if e else False})
+#
+#     rowsToSave = list()
+#     lastDate = ""
+#     lastHour = ""
+#     lastMinute = ""
+#     file, writer = firstSettingsToDB()
+#
+#     for element in elements:
+#         text = element.find("h5")
+#         citiesNames = text.next_sibling
+#         time = text.text
+#
+#         date, hour, minutes = findDate(element, lastDate, lastHour, lastMinute, time)
+#
+#         lastMinute = minutes
+#         lastHour = hour
+#         if lastDate != date and len(rowsToSave) > 0:
+#             writeToDB(rowsToSave, file, writer)
+#             rowsToSave = list()
+#
+#         lastDate = date
+#
+#         citiesList = extractListFromString(citiesNames)
+#
+#         for city in citiesList:
+#             row = [date, city, hour, minutes]
+#             rowsToSave.append(row)
+#
+#     # Create another function to add rows to DB without deleting all the previous data!
+#     # just check what is the last date and hour inserted to the csv file and put the new data until this moment.
+#
+#     if len(rowsToSave) > 0:
+#         writeToDB(rowsToSave, file, writer)
+#
+#     file.close()
 
 
 # Moved to a different file
