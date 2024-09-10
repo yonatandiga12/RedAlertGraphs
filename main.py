@@ -311,7 +311,7 @@ def plotGraphs():
 
 
 if __name__ == "__main__":
-    #getPageContentNewWay()
+    getPageContentNewWay()
     # getPageContent()
     #plotGraphs()
-    startApp()
+    #startApp()

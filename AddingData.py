@@ -36,7 +36,7 @@ def firstSettingsToDB2(name):
     file = open(path, 'a', encoding='UTF8')
     writer = csv.writer(file)
     # header = ['date', 'city', 'hour', 'minutes']
-    # writer.writerow(header)
+    #writer.writerow(header)
     writer.writerow([])
     return file, writer
 
@@ -75,7 +75,7 @@ def getPageContentNewWay():
             print(f"Failed to fetch alerts: {e}")
             return None
 
-    def process_data(data, CSVFlag=False):
+    def process_data(data, CSVFlag=True):
         if CSVFlag:
             #This is for entering the data to the CSV
             file_rocket, writer_rocket = firstSettingsToDB2('rockets_missiles.csv')
