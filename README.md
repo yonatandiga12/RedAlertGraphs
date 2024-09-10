@@ -1,5 +1,6 @@
 # RedAlertGraphs
 View Red Alert alarms in graphs, including : alarms per hours, per minute and per cities.
+      https://yonatandiga12.github.io/RedAlertGraphs/
 <br />
 <br />
 
@@ -58,7 +59,13 @@ View Red Alert alarms in graphs, including : alarms per hours, per minute and pe
 Data is harvested from : "https://www.oref.org.il/12481-he/Pakar.aspx"
 
 <br />  
-It is organized through web scarping with Beautiful Soup and Selenium library.
+
+NEW WAY:
+I got the data from this link : https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={startDate}&toDate={endDate}&mode=0
+Just change the starting date and ending date and a json dictionary will return.
+
+OLD WAY:
+It was organized through web scarping with Beautiful Soup and Selenium library.
 
 The alarms count is done in this method:
 If in the same minute there is more than 1 alarm in 1 city, I will save only 1 alarm in this minute.
