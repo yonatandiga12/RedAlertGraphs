@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 <head>
 
     <title>Alarms In Israel</title>
@@ -17,4 +17,88 @@
 
 </body>
 
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarms In Israel</title>
+    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <style>
+        /* Basic styling for tabs */
+        .tab {
+            display: flex;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+        }
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            transition: 0.3s;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #ccc;
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tabs -->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Dashboard1')" id="defaultOpen">Dashboard 1</button>
+        <button class="tablinks" onclick="openTab(event, 'Dashboard2')">Dashboard 2</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Dashboard1" class="tabcontent">
+        <div id="vizContainer1"></div>
+    </div>
+
+    <div id="Dashboard2" class="tabcontent">
+        <div id="vizContainer2"></div>
+    </div>
+
+    <script src="./app.js"></script>
+
+    <script>
+        // Function to handle tab switching
+        function openTab(evt, dashboardName) {
+            // Hide all tabcontent
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Remove the active class from all tablinks
+            var tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab and add an "active" class to the button
+            document.getElementById(dashboardName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Open the first tab by default
+        document.getElementById("defaultOpen").click();
+    </script>
+
+</body>
 </html>
