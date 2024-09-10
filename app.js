@@ -24,24 +24,3 @@ function initViz() {
 // run the initViz function when the page loads
 document.addEventListener("DOMContentLoaded", initViz);
 
-const exportPDF = document.getElementById('exportPDF');
-const exportImage = document.getElementById('exportImage');
-
-
-//click on the pdf button to generate pdf of dashboard
-function generatePDF() {
-    viz.showExportPDFDialog()
-}
-
-exportPDF.addEventListener("click", function () {
-    generatePDF();
-  });
-
-//click on image to generate image of dashboard
-function generateImage() {
-    viz.showExportImageDialog()
-}
-
-exportImage.addEventListener("click", function () {
-    generateImage();
-  });
