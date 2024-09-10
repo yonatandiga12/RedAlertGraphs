@@ -61,7 +61,7 @@ Data is harvested from : "https://www.oref.org.il/12481-he/Pakar.aspx"
 <br />  
 
 NEW WAY:
-I got the data from this link : https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate={startDate}&toDate={endDate}&mode=0
+I got the data from this link : https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate=17.12.2023&toDate=19.12.2023&mode=0
 Just change the starting date and ending date and a json dictionary will return.
 
 OLD WAY:
