@@ -2,7 +2,7 @@ let viz1, viz2;
 
 // URLs for the Tableau dashboards
 const url1 = "https://public.tableau.com/views/AlarmsInIsrael/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url2 = "https://public.tableau.com/shared/5ZJRNMD4T?:display_count=n&:origin=viz_share_link";
+const url2 = "https://public.tableau.com/views/Book1_17259701385420/Dashboard3?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
 
 // Options for both visualizations
 const options = {
