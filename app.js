@@ -8,7 +8,7 @@ const url2 = "https://public.tableau.com/views/Book1_17259701385420/Dashboard3?:
 const options = {
     hideTabs: true,
     height: 1000,
-    width: 1200,
+    width: 1600,
     onFirstInteraction: function () {
         console.log("Dashboard is interactive");
     }
