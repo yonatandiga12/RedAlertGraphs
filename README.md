@@ -12,13 +12,43 @@ View Red Alert alarms in graphs, including : alarms per hours, per minute and pe
 5. If chosen CSV: Upon finish, Open the csvFile and press "Edit" -> "Line Operations" -> "Remove empty Lines" 
 <br />
 
+
+## New Graph Examples:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot5.jpg" width="1000" title="img5">
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot6.jpg" width="1000" title="img5">
+</p>
+
+<br />
+
+## Additional Info:
+Data is harvested from : "https://www.oref.org.il/12481-he/Pakar.aspx"
+
+<br />  
+I got the data from this link : <br />  
+https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate=17.12.2023&toDate=19.12.2023&mode=0
+<br />  
+Just change the starting date and ending date and a json dictionary will return.
+
+
+<br />
+<br />
+<br />
+
+
+# OLD Graphs:
+
 ## How to view the graphs:
 1. Run the function startApp() from main.
 2. If runs locally go to http://127.0.0.1:8050/.
 <br />
 
 
-## Graph Examples:
+## OLD Graph Examples:
 <h3 align="center">Number of Alerts in selected cities</h3>
 <br />
 <br />
@@ -58,13 +88,7 @@ View Red Alert alarms in graphs, including : alarms per hours, per minute and pe
 ## Additional Info:
 Data is harvested from : "https://www.oref.org.il/12481-he/Pakar.aspx"
 
-<br />  
-
-NEW WAY:
-I got the data from this link : https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate=17.12.2023&toDate=19.12.2023&mode=0
-Just change the starting date and ending date and a json dictionary will return.
-
-OLD WAY:
+<br />
 It was organized through web scarping with Beautiful Soup and Selenium library.
 
 The alarms count is done in this method:
