@@ -1,3 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarms In Israel</title>
+    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <style>
+        /* Style the main container to center everything */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        /* Center-align the titles */
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Optional: Set width of the dashboards */
+        .viz {
+            width: 1400px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container for the first dashboard -->
+    <div class="dashboard-container">
+        <h2 class="dashboard-title">Dashboard 1: Alarms in Different Minutes, Hours and Weeks</h2>
+        <div id="vizContainer1" class="viz"></div>
+    </div>
+
+    <!-- Container for the second dashboard -->
+    <div class="dashboard-container">
+        <h2 class="dashboard-title">Dashboard 2: Alarm Analysis by Date</h2>
+        <div id="vizContainer2" class="viz"></div>
+    </div>
+
+    <script src="./app.js"></script>
+
+</body>
+</html>
+
+
+
+
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,43 +77,4 @@
 </body>
 </html> -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alarms In Israel</title>
-    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
-    <style>
-        /* Style for the dashboard container */
-        .dashboard-container {
-            margin-bottom: 50px;
-            text-align: center; /* Center-align the content within the container */
-        }
 
-        /* Style for the titles */
-        .dashboard-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Title and container for the first dashboard -->
-    <div class="dashboard-container">
-        <h2 class="dashboard-title">Dashboard 1: Alarms in Different Minutes, Hours and Weeks</h2>
-        <div id="vizContainer1"></div>
-    </div>
-
-    <!-- Title and container for the second dashboard -->
-    <div class="dashboard-container">
-        <h2 class="dashboard-title">Dashboard 2: Alarm Analysis by Date</h2>
-        <div id="vizContainer2"></div>
-    </div>
-
-    <script src="./app.js"></script>
-
-</body>
-</html>
