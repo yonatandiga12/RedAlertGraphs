@@ -14,25 +14,24 @@ View Red Alert alarms in graphs, including : alarms per hours, per minute and pe
 
 
 ## New Graph Examples:
-
+<br /> 
+<br /> 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot5.jpg" width="1000" title="img5">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenshot5.jpg" width="1000" title="img5">
+</p>
+<br /> 
+<br /> 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenshot6.jpg" width="1000" title="img6">
 </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenShot6.jpg" width="1000" title="img5">
-</p>
-
-<br />
 
 ## Additional Info:
-Data is harvested from : "https://www.oref.org.il/12481-he/Pakar.aspx"
-
 <br />  
 I got the data from this link : <br />  
 https://alerts-history.oref.org.il//Shared/Ajax/GetAlarmsHistory.aspx?lang=he&fromDate=17.12.2023&toDate=19.12.2023&mode=0
 <br />  
-Just change the starting date and ending date and a json dictionary will return.
+Just change the starting date and ending date and a json dictionary will return. 
 
 
 <br />
