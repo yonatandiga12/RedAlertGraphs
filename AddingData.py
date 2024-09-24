@@ -6,7 +6,7 @@ from tkinter import ttk
 import requests
 from datetime import datetime, timedelta
 
-#Dat until 31.8.24
+#Dat until 23.9.24
 
 DATE_INDEX = 0
 CITY_INDEX = 1

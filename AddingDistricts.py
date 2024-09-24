@@ -46,7 +46,7 @@ def getNameOfCitiesFromCitiesCSV():
     with open(PATH + CITIES_CSV, mode='r') as file:
         csvFile = csv.DictReader(file)
         for lines in csvFile:
-            cities.append(lines['HEBREW_NAME'])
+            cities.append(lines['city'])
 
     return cities
 
