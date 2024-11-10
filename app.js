@@ -3,8 +3,10 @@ let viz1, viz2;
 // URLs for the Tableau dashboards
 
 //const url1 = "https://public.tableau.com/views/AlarmsInIsrael/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url1 = "https://public.tableau.com/views/Alarmswithdistricts/Dashboard2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url2 = "https://public.tableau.com/views/Book1_17259701385420/Dashboard3?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const url1 = "https://public.tableau.com/views/Alarmswithdistricts2/Dashboard2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const url2 = "https://public.tableau.com/shared/F5XCJGZ89?:display_count=n&:origin=viz_share_link";
+const url3 = "https://public.tableau.com/views/Alarmswithdistricts/Dashboard5?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+
 
 // Options for both visualizations
 const options = {
@@ -28,10 +30,17 @@ function initViz2() {
     viz2 = new tableau.Viz(vizContainer2, url2, options);
 }
 
+// Function to initialize the third dashboard
+function initViz3() {
+    const vizContainer3 = document.getElementById('vizContainer3');
+    viz3 = new tableau.Viz(vizContainer3, url3, options);
+}
+
 // Run the initialization functions when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     initViz1();
     initViz2();
+    initViz3();
 });
 
 
