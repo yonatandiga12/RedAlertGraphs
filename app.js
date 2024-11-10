@@ -3,9 +3,9 @@ let viz1, viz2;
 // URLs for the Tableau dashboards
 
 //const url1 = "https://public.tableau.com/views/AlarmsInIsrael/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url1 = "https://public.tableau.com/views/Alarmswithdistricts2/Dashboard2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url2 = "https://public.tableau.com/shared/F5XCJGZ89?:display_count=n&:origin=viz_share_link";
-const url3 = "https://public.tableau.com/views/Alarmswithdistricts/Dashboard5?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const url1 = "https://public.tableau.com/views/AlarmsIsrael1/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const url2 = "https://public.tableau.com/views/AlarmsIsrael3/CitiesDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const url3 = "";
 
 
 // Options for both visualizations
