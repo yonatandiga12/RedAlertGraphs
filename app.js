@@ -4,8 +4,8 @@ let viz1, viz2;
 
 //const url1 = "https://public.tableau.com/views/AlarmsInIsrael/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
 const url1 = "https://public.tableau.com/views/AlarmsIsrael1/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url2 = "https://public.tableau.com/views/AlarmsIsrael3/CitiesDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
-const url3 = "";
+const url2 = "https://public.tableau.com/views/AlarmsIsrael2/AlarmsinMonths?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const url3 = "https://public.tableau.com/views/AlarmsIsrael3/CitiesDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
 
 
 // Options for both visualizations
