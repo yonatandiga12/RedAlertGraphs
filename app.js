@@ -8,7 +8,7 @@ const dashboardURLs = [
 ];
 
 const dashboardNames = [
-    "Bt Hour,Minutes,Hours",
+    "By Hour,Minutes,Hours",
     "By Date",
     "By City"
 ];
