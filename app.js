@@ -17,8 +17,8 @@ const dashboardNames = [
 // Options for all dashboards
 const options = {
     hideTabs: true,
-    height: 800,
-    width: 1200,
+    height: 1200,
+    width: 1600,
     onFirstInteraction: function () {
         console.log("Dashboard is interactive");
     }
