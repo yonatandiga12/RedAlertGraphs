@@ -3,84 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alarms In Israel</title>
+    <title>Alarms In Israel - Interactive Analysis</title>
     <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
     <style>
-        /* Style the main container to center everything */
-        .dashboard-container {
+        /* Body styling with gradient background */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2e8b57, #3cb371);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 50px;
+            margin: 0;
         }
 
-        /* Center-align the titles */
-        .dashboard-title {
-            font-size: 24px;
+        /* Page title styling */
+        h1 {
+            margin: 20px;
+            font-size: 36px;
             font-weight: bold;
-            margin: 20px 0;
             text-align: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px #000;
         }
 
-        /* Optional: Set width of the dashboards */
+        /* Styling for tab navigation */
+        .tab {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            background-color: #1f1f1f;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab button {
+            background: transparent;
+            color: #ddd;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            color: #f1f1f1;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab button.active {
+            color: #ffffff;
+            border-bottom: 3px solid #4caf50;
+            font-weight: bold;
+        }
+
+        /* Centered dashboard container styling */
+        .dashboard-container {
+            display: none;
+            padding: 20px;
+            width: 100%;
+            max-width: 1400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeEffect 0.5s;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Style for Tableau visualizations */
         .viz {
-            width: 1400px;
+            width: 100%;
+            max-width: 1200px;
+            height: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Fade effect for dashboard display */
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
     </style>
 </head>
 <body>
 
-    <!-- Container for the first dashboard -->
-    <div class="dashboard-container">
-        <h2 class="dashboard-title">Dashboard 1: Alarms in Different Minutes, Hours and Weeks</h2>
-        <div id="vizContainer1" class="viz"></div>
-    </div>
+    <!-- Page Title -->
+    <h1>Red Alerts - Interactive Analysis</h1>
 
-    <!-- Container for the second dashboard -->
-    <div class="dashboard-container">
-        <h2 class="dashboard-title">Dashboard 2: Alarm Analysis by Date</h2>
-        <div id="vizContainer2" class="viz"></div>
-    </div>
+    <!-- Tab navigation (populated dynamically) -->
+    <div id="tabContainer" class="tab"></div>
 
-    <!-- Container for the third dashboard -->
-    <div class="dashboard-container">
-        <h2 class="dashboard-title">Dashboard 3: Alarm Analysis in cities</h2>
-        <div id="vizContainer3" class="viz"></div>
-    </div>
+    <!-- Dashboard Containers (populated dynamically) -->
+    <div id="dashboardContainer"></div>
 
     <script src="./app.js"></script>
+    <script>
+        // Function to open the selected dashboard
+        function openDashboard(evt, dashboardIndex) {
+            // Hide all dashboard containers
+            let containers = document.getElementsByClassName("dashboard-container");
+            for (let i = 0; i < containers.length; i++) {
+                containers[i].style.display = "none";
+            }
+
+            // Remove active class from all tab buttons
+            let tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the selected dashboard and set the button as active
+            document.getElementById("Dashboard" + dashboardIndex).style.display = "flex";
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Initialize the first tab and display the first dashboard
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector(".tablinks").click();
+        });
+    </script>
 
 </body>
 </html>
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alarms In Israel</title>
-    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
-    <style>
-        /* Optional: Add some spacing between the dashboards */
-        .dashboard-container {
-            margin-bottom: 50px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Container for the first dashboard -->
-    <div id="vizContainer1" class="dashboard-container"></div>
-
-    <!-- Container for the second dashboard -->
-    <div id="vizContainer2" class="dashboard-container"></div>
-
-    <script src="./app.js"></script>
-
-</body>
-</html> -->
-
-
