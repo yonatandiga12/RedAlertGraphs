@@ -13,6 +13,12 @@ const dashboardNames = [
     "By City"
 ];
 
+vizContainer.innerHTML = `
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+        <div id="vizContainer${index}" class="viz"></div>
+    </div>
+`;
+
 
 // Options for all dashboards
 const options = {
