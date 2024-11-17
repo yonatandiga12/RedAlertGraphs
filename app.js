@@ -2,15 +2,17 @@
 
 // Array of Tableau dashboard URLs
 const dashboardURLs = [
-    "https://public.tableau.com/views/AlarmsIsrael1/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-    "https://public.tableau.com/views/AlarmsIsrael2/AlarmsinMonths?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-    "https://public.tableau.com/views/AlarmsIsrael3/CitiesDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+    "https://public.tableau.com/views/AlarmsInHoursMinutes/Dashboard1_2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/AlarmsInWeeks/Dashboard6?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/AlarmsInDates2/AlarmsinMonths?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/AlarmsInCities2/CitiesDashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
 ];
 
 const dashboardNames = [
-    "By Hour,Minutes,Hours",
-    "By Date",
-    "By City"
+    "By Hours,Minutes",
+    "By Weeks",
+    "By Months",
+    "By Cities"
 ];
 
 vizContainer.innerHTML = `
