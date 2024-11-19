@@ -2,6 +2,7 @@
 
 // Array of Tableau dashboard URLs
 const dashboardURLs = [
+    "https://public.tableau.com/views/AlarmsIsrael3DistrictsInTime/Dashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
     "https://public.tableau.com/views/AlarmsInHoursMinutes/Dashboard1_2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
     "https://public.tableau.com/views/AlarmsInWeeks/Dashboard6?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
     "https://public.tableau.com/views/AlarmsInDates2/AlarmsinMonths?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
@@ -9,6 +10,7 @@ const dashboardURLs = [
 ];
 
 const dashboardNames = [
+    "By Districts",
     "By Hours,Minutes",
     "By Weeks",
     "By Months",
