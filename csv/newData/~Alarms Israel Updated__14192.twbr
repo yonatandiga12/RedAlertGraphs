@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <!-- build 20242.24.0807.0327                               -->
-<workbook original-version='18.1' source-build='2024.2.2 (20242.24.0807.0327)' source-platform='win' version='18.1' xml:base='https://localhost' xmlns:user='http://www.tableausoftware.com/xml/user'>
+<workbook original-version='18.1' source-build='2024.2.2 (20242.24.0807.0327)' source-platform='win' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
     <_.fcp.AccessibleZoneTabOrder.true...AccessibleZoneTabOrder />
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
@@ -23,7 +23,7 @@
     <WorksheetBackgroundTransparency />
     <ZoneBackgroundTransparency />
   </document-format-change-manifest>
-  <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3?rev=1.0' id='AlarmsIsrael3' path='/workbooks' revision='1.0' />
+  <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime?rev=1.0' id='RedAlerts2' path='/workbooks' revision='1.0' />
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
@@ -36,6 +36,682 @@
     </_.fcp.MarkAnimation.true...style-rule>
   </style>
   <datasources>
+    <datasource caption=' Union Cities' inline='true' name='federated.1q85cvg1kplzjc11h5k61157idcd' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cities' name='textscan.1cahyrg11lheax13fpuyc1sz7432'>
+            <connection class='textclean' cleaning='yes' compat='no' csvFile='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData/cities.csv' dataRefreshTime='' directory='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData' interpretationMode='8' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='aircraft_intrusions.csv' table='[aircraft_intrusions#csv$]' type='table'>
+          <columns gridOrigin='A1:D4991:no:A1:D4991:1'>
+            <column datatype='date' name='date' ordinal='0' />
+            <column datatype='string' name='city' ordinal='1' />
+            <column datatype='integer' name='hour' ordinal='2' />
+            <column datatype='integer' name='minutes' ordinal='3' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+          <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='aircraft_intrusions.csv' table='[aircraft_intrusions#csv$]' type='table'>
+            <columns gridOrigin='A1:D4991:no:A1:D4991:1'>
+              <column datatype='date' name='date' ordinal='0' />
+              <column datatype='string' name='city' ordinal='1' />
+              <column datatype='integer' name='hour' ordinal='2' />
+              <column datatype='integer' name='minutes' ordinal='3' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='cities.csv' table='[cities#csv$]' type='table'>
+            <columns gridOrigin='A1:B1669:no:A1:B1669:0'>
+              <column datatype='string' name='City2' ordinal='0' />
+              <column datatype='string' name='mahoz' ordinal='1' />
+            </columns>
+          </relation>
+          <_.fcp.ObjectModelSharedDimensions.true...relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='rockets_missiles.csv' table='[rockets_missiles#csv$]' type='table'>
+            <columns gridOrigin='A1:D12226:no:A1:D12226:1'>
+              <column datatype='date' name='date' ordinal='0' />
+              <column datatype='string' name='city' ordinal='1' />
+              <column datatype='integer' name='hour' ordinal='2' />
+              <column datatype='integer' name='minutes' ordinal='3' />
+            </columns>
+          </_.fcp.ObjectModelSharedDimensions.true...relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <cols>
+          <map key='[City2]' value='[cities.csv].[City2]' />
+          <map key='[city (rockets_missiles.csv)]' value='[rockets_missiles.csv].[city]' />
+          <map key='[city]' value='[aircraft_intrusions.csv].[city]' />
+          <map key='[date (rockets_missiles.csv)]' value='[rockets_missiles.csv].[date]' />
+          <map key='[date]' value='[aircraft_intrusions.csv].[date]' />
+          <map key='[hour (rockets_missiles.csv)]' value='[rockets_missiles.csv].[hour]' />
+          <map key='[hour]' value='[aircraft_intrusions.csv].[hour]' />
+          <map key='[mahoz]' value='[cities.csv].[mahoz]' />
+          <map key='[minutes (rockets_missiles.csv)]' value='[rockets_missiles.csv].[minutes]' />
+          <map key='[minutes]' value='[aircraft_intrusions.csv].[minutes]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[aircraft_intrusions.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:D4991:no:A1:D4991:1&quot;</attribute>
+              <attribute datatype='integer' name='lost'>0</attribute>
+              <attribute datatype='integer' name='outcome'>1</attribute>
+              <attribute datatype='integer' name='processed'>14970</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[cities.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:B1669:no:A1:B1669:0&quot;</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:D12226:no:A1:D12226:1&quot;</attribute>
+              <attribute datatype='integer' name='lost'>0</attribute>
+              <attribute datatype='integer' name='outcome'>1</attribute>
+              <attribute datatype='integer' name='processed'>36675</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[date]</local-name>
+            <parent-name>[aircraft_intrusions.csv]</parent-name>
+            <remote-alias>date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>city</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[city]</local-name>
+            <parent-name>[aircraft_intrusions.csv]</parent-name>
+            <remote-alias>city</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LHE_RIL_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hour</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hour]</local-name>
+            <parent-name>[aircraft_intrusions.csv]</parent-name>
+            <remote-alias>hour</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>minutes</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[minutes]</local-name>
+            <parent-name>[aircraft_intrusions.csv]</parent-name>
+            <remote-alias>minutes</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>City2</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[City2]</local-name>
+            <parent-name>[cities.csv]</parent-name>
+            <remote-alias>City2</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LHE_RIL_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_47BA00A35DC0413A93246B08378D160E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mahoz</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[mahoz]</local-name>
+            <parent-name>[cities.csv]</parent-name>
+            <remote-alias>mahoz</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LHE_RIL_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_47BA00A35DC0413A93246B08378D160E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[date (rockets_missiles.csv)]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>date</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>city</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[city (rockets_missiles.csv)]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>city</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LHE_RIL_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>hour</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hour (rockets_missiles.csv)]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>hour</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>minutes</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[minutes (rockets_missiles.csv)]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>minutes</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[City2]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <_.fcp.ObjectModelTableType.true...column caption='aircraft_intrusions.csv' datatype='table' name='[__tableau_internal_object_id__].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='cities.csv' datatype='table' name='[__tableau_internal_object_id__].[cities.csv_47BA00A35DC0413A93246B08378D160E]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='rockets_missiles.csv' datatype='table' name='[__tableau_internal_object_id__].[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]' role='measure' type='quantitative' />
+      <column datatype='string' name='[city (rockets_missiles.csv)]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 3.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username=''>
+          <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' table='[Extract].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' type='table' />
+          <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+            <relation name='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' table='[Extract].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' type='table' />
+            <relation name='cities.csv_47BA00A35DC0413A93246B08378D160E' table='[Extract].[cities.csv_47BA00A35DC0413A93246B08378D160E]' type='table' />
+            <_.fcp.ObjectModelSharedDimensions.true...relation name='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83' table='[Extract].[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]' type='table' />
+          </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+          <cols>
+            <map key='[City2]' value='[cities.csv_47BA00A35DC0413A93246B08378D160E].[City2]' />
+            <map key='[city (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[city]' />
+            <map key='[city]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[city]' />
+            <map key='[date (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[date]' />
+            <map key='[date]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[date]' />
+            <map key='[hour (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[hour]' />
+            <map key='[hour]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[hour]' />
+            <map key='[mahoz]' value='[cities.csv_47BA00A35DC0413A93246B08378D160E].[mahoz]' />
+            <map key='[minutes (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[minutes]' />
+            <map key='[minutes]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[minutes]' />
+          </cols>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[date]</local-name>
+              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
+              <remote-alias>date</remote-alias>
+              <ordinal>0</ordinal>
+              <family>aircraft_intrusions.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>211</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[city]</local-name>
+              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
+              <remote-alias>city</remote-alias>
+              <ordinal>1</ordinal>
+              <family>aircraft_intrusions.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>304</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LHE_RIL' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>hour</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[hour]</local-name>
+              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
+              <remote-alias>hour</remote-alias>
+              <ordinal>2</ordinal>
+              <family>aircraft_intrusions.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>25</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>minutes</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[minutes]</local-name>
+              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
+              <remote-alias>minutes</remote-alias>
+              <ordinal>3</ordinal>
+              <family>aircraft_intrusions.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>60</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>City2</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[City2]</local-name>
+              <parent-name>[cities.csv_47BA00A35DC0413A93246B08378D160E]</parent-name>
+              <remote-alias>City2</remote-alias>
+              <ordinal>4</ordinal>
+              <family>cities.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1668</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LHE_RIL' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>mahoz</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[mahoz]</local-name>
+              <parent-name>[cities.csv_47BA00A35DC0413A93246B08378D160E]</parent-name>
+              <remote-alias>mahoz</remote-alias>
+              <ordinal>5</ordinal>
+              <family>cities.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LHE_RIL' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[date (rockets_missiles.csv)]</local-name>
+              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
+              <remote-alias>date</remote-alias>
+              <ordinal>6</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>410</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[city (rockets_missiles.csv)]</local-name>
+              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
+              <remote-alias>city</remote-alias>
+              <ordinal>7</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>882</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LHE_RIL' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>hour</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[hour (rockets_missiles.csv)]</local-name>
+              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
+              <remote-alias>hour</remote-alias>
+              <ordinal>8</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>24</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>minutes</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[minutes (rockets_missiles.csv)]</local-name>
+              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
+              <remote-alias>minutes</remote-alias>
+              <ordinal>9</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>60</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Israel&quot;' />
+      </semantic-values>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='aircraft_intrusions.csv' id='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269'>
+            <properties context=''>
+              <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='aircraft_intrusions.csv' table='[aircraft_intrusions#csv$]' type='table'>
+                <columns gridOrigin='A1:D4991:no:A1:D4991:1'>
+                  <column datatype='date' name='date' ordinal='0' />
+                  <column datatype='string' name='city' ordinal='1' />
+                  <column datatype='integer' name='hour' ordinal='2' />
+                  <column datatype='integer' name='minutes' ordinal='3' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' table='[Extract].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' type='table' />
+            </properties>
+          </object>
+          <object caption='cities.csv' id='cities.csv_47BA00A35DC0413A93246B08378D160E'>
+            <properties context=''>
+              <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='cities.csv' table='[cities#csv$]' type='table'>
+                <columns gridOrigin='A1:B1669:no:A1:B1669:0'>
+                  <column datatype='string' name='City2' ordinal='0' />
+                  <column datatype='string' name='mahoz' ordinal='1' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='cities.csv_47BA00A35DC0413A93246B08378D160E' table='[Extract].[cities.csv_47BA00A35DC0413A93246B08378D160E]' type='table' />
+            </properties>
+          </object>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='rockets_missiles.csv' id='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83'>
+            <properties context=''>
+              <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='rockets_missiles.csv' table='[rockets_missiles#csv$]' type='table'>
+                <columns gridOrigin='A1:D12226:no:A1:D12226:1'>
+                  <column datatype='date' name='date' ordinal='0' />
+                  <column datatype='string' name='city' ordinal='1' />
+                  <column datatype='integer' name='hour' ordinal='2' />
+                  <column datatype='integer' name='minutes' ordinal='3' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83' table='[Extract].[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]' type='table' />
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[city]' />
+              <expression op='[City2]' />
+            </expression>
+            <first-end-point object-id='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' />
+            <second-end-point object-id='cities.csv_47BA00A35DC0413A93246B08378D160E' />
+          </relationship>
+          <_.fcp.ObjectModelSharedDimensions.true...relationship>
+            <expression op='='>
+              <expression op='[city (rockets_missiles.csv)]' />
+              <expression op='[City2]' />
+            </expression>
+            <first-end-point object-id='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83' />
+            <second-end-point object-id='cities.csv_47BA00A35DC0413A93246B08378D160E' />
+          </_.fcp.ObjectModelSharedDimensions.true...relationship>
+        </relationships>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+    <datasource caption='rockets_missiles' inline='true' name='federated.1r6bwf21nq2zps114b0sy1o4p2r8' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='rockets_missiles' name='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4'>
+            <connection class='textscan' cleaning='yes' compat='no' csvFile='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData/rockets_missiles.csv' dataRefreshTime='' directory='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData' interpretationMode='8' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4' name='rockets_missiles.csv' table='[C:\Fun projects\RedAlert\RedAlertGraphs\csv\newData\rockets_missiles#csv]' type='table'>
+          <columns character-set='UTF-8' gridOrigin='A1:D10916:no:A1:D10916:1' header='yes' locale='he_IL' separator=','>
+            <column datatype='date' name='date' ordinal='0' />
+            <column datatype='string' name='city' ordinal='1' />
+            <column datatype='integer' name='hour' ordinal='2' />
+            <column datatype='integer' name='minutes' ordinal='3' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4' name='rockets_missiles.csv' table='[C:\Fun projects\RedAlert\RedAlertGraphs\csv\newData\rockets_missiles#csv]' type='table'>
+          <columns character-set='UTF-8' gridOrigin='A1:D10916:no:A1:D10916:1' header='yes' locale='he_IL' separator=','>
+            <column datatype='date' name='date' ordinal='0' />
+            <column datatype='string' name='city' ordinal='1' />
+            <column datatype='integer' name='hour' ordinal='2' />
+            <column datatype='integer' name='minutes' ordinal='3' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;he&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;₪&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;‏&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:D10916:no:A1:D10916:1&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;he_IL&quot;</attribute>
+              <attribute datatype='string' name='minus-char'>&quot;‎-&quot;</attribute>
+              <attribute datatype='string' name='plus-char'>&quot;‎+&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[date]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>city</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[city]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>city</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LHE_RIL' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>hour</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hour]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>hour</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>minutes</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[minutes]</local-name>
+            <parent-name>[rockets_missiles.csv]</parent-name>
+            <remote-alias>minutes</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='NumberOfHours' datatype='integer' name='[Calculation_1999879769667284992]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNT([hour])' />
+      </column>
+      <_.fcp.ObjectModelTableType.true...column caption='rockets_missiles.csv' datatype='table' name='[__tableau_internal_object_id__].[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]' role='measure' type='quantitative' />
+      <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
+        <connection authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 4.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username=''>
+          <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>date</remote-alias>
+              <ordinal>0</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>435</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[city]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>city</remote-alias>
+              <ordinal>1</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>736</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LHE_RIL' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>hour</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[hour]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>hour</remote-alias>
+              <ordinal>2</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>24</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>minutes</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[minutes]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>minutes</remote-alias>
+              <ordinal>3</ordinal>
+              <family>rockets_missiles.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>60</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Israel&quot;' />
+      </semantic-values>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='rockets_missiles.csv' id='rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A'>
+            <properties context=''>
+              <relation connection='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4' name='rockets_missiles.csv' table='[C:\Fun projects\RedAlert\RedAlertGraphs\csv\newData\rockets_missiles#csv]' type='table'>
+                <columns character-set='UTF-8' gridOrigin='A1:D10916:no:A1:D10916:1' header='yes' locale='he_IL' separator=','>
+                  <column datatype='date' name='date' ordinal='0' />
+                  <column datatype='string' name='city' ordinal='1' />
+                  <column datatype='integer' name='hour' ordinal='2' />
+                  <column datatype='integer' name='minutes' ordinal='3' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
     <datasource caption='Union Of aircraft and rockets' inline='true' name='federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z' version='18.1'>
       <connection class='federated'>
         <named-connections>
@@ -95,7 +771,7 @@
             </relation>
           </_.fcp.ObjectModelSharedDimensions.true...relation>
           <relation connection='textscan.0glw0u60z4fxus18bqxun16oxi6j' name='cities.csv' table='[cities#csv]' type='table'>
-            <columns character-set='ISO_8859-8:1988' header='yes' locale='he_IL' separator=','>
+            <columns character-set='UTF-8' header='yes' locale='he_IL' separator=','>
               <column datatype='string' name='City2' ordinal='0' />
               <column datatype='string' name='mahoz' ordinal='1' />
             </columns>
@@ -118,7 +794,7 @@
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
             <attributes>
-              <attribute datatype='string' name='character-set'>&quot;ISO_8859-8:1988&quot;</attribute>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
               <attribute datatype='string' name='collation'>&quot;he&quot;</attribute>
               <attribute datatype='string' name='currency'>&quot;₪&quot;</attribute>
               <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
@@ -206,7 +882,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LHE_RIL' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>mahoz</remote-name>
@@ -221,7 +897,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LHE_RIL' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
         </metadata-records>
       </connection>
@@ -264,7 +940,7 @@
       </column>
       <column datatype='string' name='[City2]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <_.fcp.ObjectModelTableType.true...column caption='aircraft_intrusions.csv' datatype='table' name='[__tableau_internal_object_id__].[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]' role='measure' type='quantitative' />
-      <_.fcp.ObjectModelTableType.true...column caption='cities.csv' datatype='table' name='[__tableau_internal_object_id__].[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='cities.csv' datatype='table' name='[__tableau_internal_object_id__].[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]' role='measure' type='quantitative' />
       <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <column datatype='date' name='[date]' role='dimension' type='ordinal' />
       <column datatype='string' name='[mahoz]' role='dimension' type='nominal' />
@@ -279,15 +955,12 @@
         </groupfilter>
       </group>
       <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='11/10/2024 12:52:01 PM' username=''>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='' username='tableau_internal_user'>
           <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='aircraft_intrusions.csv_9992360313FF48189B543F21342678F2' table='[Extract].[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]' type='table' />
           <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
             <relation name='aircraft_intrusions.csv_9992360313FF48189B543F21342678F2' table='[Extract].[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]' type='table' />
-            <relation name='cities.csv_589A6479DE524E78A7D41DE9C4AF371D' table='[Extract].[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]' type='table' />
+            <relation name='cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2' table='[Extract].[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]' type='table' />
           </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
-          <refresh>
-            <refresh-event add-from-file-path='Union Of aircraft and rockets' increment-value='%null%' refresh-type='create' rows-inserted='29876' timestamp-start='2024-11-10 12:52:00.690' />
-          </refresh>
           <metadata-records>
             <metadata-record class='column'>
               <remote-name>date</remote-name>
@@ -299,9 +972,8 @@
               <family>aircraft_intrusions.csv+</family>
               <local-type>date</local-type>
               <aggregation>Year</aggregation>
-              <approx-count>569</approx-count>
+              <approx-count>680</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>city</remote-name>
@@ -313,10 +985,9 @@
               <family>aircraft_intrusions.csv+</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>1627</approx-count>
+              <approx-count>1809</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>hour</remote-name>
@@ -330,7 +1001,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>24</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>minutes</remote-name>
@@ -344,7 +1014,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>60</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>Table Name</remote-name>
@@ -359,37 +1028,34 @@
               <approx-count>2</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>City2</remote-name>
               <remote-type>129</remote-type>
               <local-name>[City2]</local-name>
-              <parent-name>[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]</parent-name>
+              <parent-name>[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]</parent-name>
               <remote-alias>City2</remote-alias>
               <ordinal>5</ordinal>
               <family>cities.csv</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>1668</approx-count>
+              <approx-count>1636</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>mahoz</remote-name>
               <remote-type>129</remote-type>
               <local-name>[mahoz]</local-name>
-              <parent-name>[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]</parent-name>
+              <parent-name>[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]</parent-name>
               <remote-alias>mahoz</remote-alias>
               <ordinal>6</ordinal>
               <family>cities.csv</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>6</approx-count>
+              <approx-count>7</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
           </metadata-records>
         </connection>
@@ -397,37 +1063,6 @@
       <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' rowDisplayCount='100' show-structure='true' />
       <style>
         <style-rule element='mark'>
-          <encoding attr='color' field='[none:Calculation_1999879769677549591:nk]' type='palette'>
-            <map to='#4e79a7'>
-              <bucket>&quot;Aircraft&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;Rocket&quot;</bucket>
-            </map>
-          </encoding>
-          <encoding attr='color' field='[none:mahoz:nk]' type='palette'>
-            <map to='#4e79a7'>
-              <bucket>%null%</bucket>
-            </map>
-            <map to='#59a14f'>
-              <bucket>&quot;מרכז&quot;</bucket>
-            </map>
-            <map to='#76b7b2'>
-              <bucket>&quot;יהודה ושומרון&quot;</bucket>
-            </map>
-            <map to='#b07aa1'>
-              <bucket>&quot;עמקים&quot;</bucket>
-            </map>
-            <map to='#e15759'>
-              <bucket>&quot;השפלה וההר&quot;</bucket>
-            </map>
-            <map to='#edc948'>
-              <bucket>&quot;נגב&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;גולן גליל&quot;</bucket>
-            </map>
-          </encoding>
           <encoding attr='color' field='[none:city:nk]' type='palette'>
             <map to='#499894'>
               <bucket>&quot;אביאל&quot;</bucket>
@@ -4507,6 +5142,9 @@
               <bucket>&quot;אל סייד&quot;</bucket>
             </map>
             <map to='#ffbe7d'>
+              <bucket>&quot;אליפז ומכרות תמנע&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
               <bucket>&quot;אליקים&quot;</bucket>
             </map>
             <map to='#ffbe7d'>
@@ -4699,6 +5337,37 @@
               <bucket>&quot;תל שבע&quot;</bucket>
             </map>
           </encoding>
+          <encoding attr='color' field='[none:Calculation_1999879769677549591:nk]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;Aircraft&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Rocket&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:mahoz:nk]' type='palette'>
+            <map to='#59a14f'>
+              <bucket>&quot;מרכז&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;עמקים&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>%null%</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;יהודה ושומרון&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;השפלה וההר&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;נגב&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;גולן גליל&quot;</bucket>
+            </map>
+          </encoding>
         </style-rule>
       </style>
       <semantic-values>
@@ -4739,17 +5408,17 @@
               <relation name='aircraft_intrusions.csv_9992360313FF48189B543F21342678F2' table='[Extract].[aircraft_intrusions.csv_9992360313FF48189B543F21342678F2]' type='table' />
             </properties>
           </object>
-          <object caption='cities.csv' id='cities.csv_589A6479DE524E78A7D41DE9C4AF371D'>
+          <object caption='cities.csv' id='cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2'>
             <properties context=''>
               <relation connection='textscan.0glw0u60z4fxus18bqxun16oxi6j' name='cities.csv' table='[cities#csv]' type='table'>
-                <columns character-set='ISO_8859-8:1988' header='yes' locale='he_IL' separator=','>
+                <columns character-set='UTF-8' header='yes' locale='he_IL' separator=','>
                   <column datatype='string' name='City2' ordinal='0' />
                   <column datatype='string' name='mahoz' ordinal='1' />
                 </columns>
               </relation>
             </properties>
             <properties context='extract'>
-              <relation name='cities.csv_589A6479DE524E78A7D41DE9C4AF371D' table='[Extract].[cities.csv_589A6479DE524E78A7D41DE9C4AF371D]' type='table' />
+              <relation name='cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2' table='[Extract].[cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2]' type='table' />
             </properties>
           </object>
         </objects>
@@ -4760,7 +5429,7 @@
               <expression op='[City2]' />
             </expression>
             <first-end-point object-id='aircraft_intrusions.csv_9992360313FF48189B543F21342678F2' />
-            <second-end-point object-id='cities.csv_589A6479DE524E78A7D41DE9C4AF371D' />
+            <second-end-point object-id='cities.csv_CB1E5BF7F59E4C3D91C7E9DDD59833B2' />
           </relationship>
         </relationships>
       </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
@@ -4868,13 +5537,10 @@
       <_.fcp.ObjectModelTableType.true...column caption='aircraft_intrusions.csv' datatype='table' name='[__tableau_internal_object_id__].[aircraft_intrusions.csv_A21D8170F4EF422887C974F5A53B979F]' role='measure' type='quantitative' />
       <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 1.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='11/10/2024 12:52:02 PM' username=''>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 1.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='' username='tableau_internal_user'>
           <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh>
-            <refresh-event add-from-file-path='aircraft_intrusions' increment-value='%null%' refresh-type='create' rows-inserted='5825' timestamp-start='2024-11-10 12:52:02.564' />
-          </refresh>
           <metadata-records>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <metadata-record class='column'>
               <remote-name>date</remote-name>
               <remote-type>133</remote-type>
               <local-name>[date]</local-name>
@@ -4884,11 +5550,10 @@
               <family>aircraft_intrusions.csv</family>
               <local-type>date</local-type>
               <aggregation>Year</aggregation>
-              <approx-count>256</approx-count>
+              <approx-count>293</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_A21D8170F4EF422887C974F5A53B979F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            </metadata-record>
+            <metadata-record class='column'>
               <remote-name>city</remote-name>
               <remote-type>129</remote-type>
               <local-name>[city]</local-name>
@@ -4898,12 +5563,11 @@
               <family>aircraft_intrusions.csv</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>345</approx-count>
+              <approx-count>365</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_A21D8170F4EF422887C974F5A53B979F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            </metadata-record>
+            <metadata-record class='column'>
               <remote-name>hour</remote-name>
               <remote-type>20</remote-type>
               <local-name>[hour]</local-name>
@@ -4913,11 +5577,10 @@
               <family>aircraft_intrusions.csv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>24</approx-count>
+              <approx-count>25</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_A21D8170F4EF422887C974F5A53B979F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            </metadata-record>
+            <metadata-record class='column'>
               <remote-name>minutes</remote-name>
               <remote-type>20</remote-type>
               <local-name>[minutes]</local-name>
@@ -4929,8 +5592,7 @@
               <aggregation>Sum</aggregation>
               <approx-count>60</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_A21D8170F4EF422887C974F5A53B979F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+            </metadata-record>
           </metadata-records>
         </connection>
       </extract>
@@ -5061,13 +5723,10 @@
       <_.fcp.ObjectModelTableType.true...column caption='terrorists_intrusions.csv' datatype='table' name='[__tableau_internal_object_id__].[terrorists_intrusions.csv_55CA35366DF24769B1BD5AE7241DD102]' role='measure' type='quantitative' />
       <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 2.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='11/10/2024 12:52:03 PM' username=''>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 2.hyper' default-settings='yes' schema='Extract' sslmode='' update-time='' username='tableau_internal_user'>
           <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh>
-            <refresh-event add-from-file-path='terrorists_intrusions' increment-value='%null%' refresh-type='create' rows-inserted='34' timestamp-start='2024-11-10 12:52:03.312' />
-          </refresh>
           <metadata-records>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <metadata-record class='column'>
               <remote-name>date</remote-name>
               <remote-type>133</remote-type>
               <local-name>[date]</local-name>
@@ -5077,11 +5736,10 @@
               <family>terrorists_intrusions.csv</family>
               <local-type>date</local-type>
               <aggregation>Year</aggregation>
-              <approx-count>18</approx-count>
+              <approx-count>19</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[terrorists_intrusions.csv_55CA35366DF24769B1BD5AE7241DD102]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            </metadata-record>
+            <metadata-record class='column'>
               <remote-name>city</remote-name>
               <remote-type>129</remote-type>
               <local-name>[city]</local-name>
@@ -5091,12 +5749,11 @@
               <family>terrorists_intrusions.csv</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>22</approx-count>
+              <approx-count>23</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[terrorists_intrusions.csv_55CA35366DF24769B1BD5AE7241DD102]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            </metadata-record>
+            <metadata-record class='column'>
               <remote-name>hour</remote-name>
               <remote-type>20</remote-type>
               <local-name>[hour]</local-name>
@@ -5106,11 +5763,10 @@
               <family>terrorists_intrusions.csv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>13</approx-count>
+              <approx-count>14</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[terrorists_intrusions.csv_55CA35366DF24769B1BD5AE7241DD102]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            </metadata-record>
+            <metadata-record class='column'>
               <remote-name>minutes</remote-name>
               <remote-type>20</remote-type>
               <local-name>[minutes]</local-name>
@@ -5120,10 +5776,9 @@
               <family>terrorists_intrusions.csv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>25</approx-count>
+              <approx-count>26</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[terrorists_intrusions.csv_55CA35366DF24769B1BD5AE7241DD102]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+            </metadata-record>
           </metadata-records>
         </connection>
       </extract>
@@ -5151,702 +5806,6 @@
         </objects>
       </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
     </datasource>
-    <datasource caption=' Union Cities' inline='true' name='federated.1q85cvg1kplzjc11h5k61157idcd' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='cities' name='textscan.1cahyrg11lheax13fpuyc1sz7432'>
-            <connection class='textclean' cleaning='yes' compat='no' csvFile='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData/cities.csv' dataRefreshTime='' directory='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData' interpretationMode='8' validate='no' workgroup-auth-mode='as-is' />
-          </named-connection>
-        </named-connections>
-        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='aircraft_intrusions.csv' table='[aircraft_intrusions#csv$]' type='table'>
-          <columns gridOrigin='A1:D4991:no:A1:D4991:1'>
-            <column datatype='date' name='date' ordinal='0' />
-            <column datatype='string' name='city' ordinal='1' />
-            <column datatype='integer' name='hour' ordinal='2' />
-            <column datatype='integer' name='minutes' ordinal='3' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
-        <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
-          <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='aircraft_intrusions.csv' table='[aircraft_intrusions#csv$]' type='table'>
-            <columns gridOrigin='A1:D4991:no:A1:D4991:1'>
-              <column datatype='date' name='date' ordinal='0' />
-              <column datatype='string' name='city' ordinal='1' />
-              <column datatype='integer' name='hour' ordinal='2' />
-              <column datatype='integer' name='minutes' ordinal='3' />
-            </columns>
-          </relation>
-          <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='cities.csv' table='[cities#csv$]' type='table'>
-            <columns gridOrigin='A1:B1669:no:A1:B1669:0'>
-              <column datatype='string' name='City2' ordinal='0' />
-              <column datatype='string' name='mahoz' ordinal='1' />
-            </columns>
-          </relation>
-          <_.fcp.ObjectModelSharedDimensions.true...relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='rockets_missiles.csv' table='[rockets_missiles#csv$]' type='table'>
-            <columns gridOrigin='A1:D12226:no:A1:D12226:1'>
-              <column datatype='date' name='date' ordinal='0' />
-              <column datatype='string' name='city' ordinal='1' />
-              <column datatype='integer' name='hour' ordinal='2' />
-              <column datatype='integer' name='minutes' ordinal='3' />
-            </columns>
-          </_.fcp.ObjectModelSharedDimensions.true...relation>
-        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
-        <cols>
-          <map key='[City2]' value='[cities.csv].[City2]' />
-          <map key='[city (rockets_missiles.csv)]' value='[rockets_missiles.csv].[city]' />
-          <map key='[city]' value='[aircraft_intrusions.csv].[city]' />
-          <map key='[date (rockets_missiles.csv)]' value='[rockets_missiles.csv].[date]' />
-          <map key='[date]' value='[aircraft_intrusions.csv].[date]' />
-          <map key='[hour (rockets_missiles.csv)]' value='[rockets_missiles.csv].[hour]' />
-          <map key='[hour]' value='[aircraft_intrusions.csv].[hour]' />
-          <map key='[mahoz]' value='[cities.csv].[mahoz]' />
-          <map key='[minutes (rockets_missiles.csv)]' value='[rockets_missiles.csv].[minutes]' />
-          <map key='[minutes]' value='[aircraft_intrusions.csv].[minutes]' />
-        </cols>
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[aircraft_intrusions.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='integer' name='context'>0</attribute>
-              <attribute datatype='string' name='gridOrigin'>&quot;A1:D4991:no:A1:D4991:1&quot;</attribute>
-              <attribute datatype='integer' name='lost'>0</attribute>
-              <attribute datatype='integer' name='outcome'>1</attribute>
-              <attribute datatype='integer' name='processed'>14970</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[cities.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='integer' name='context'>0</attribute>
-              <attribute datatype='string' name='gridOrigin'>&quot;A1:B1669:no:A1:B1669:0&quot;</attribute>
-              <attribute datatype='integer' name='outcome'>6</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='integer' name='context'>0</attribute>
-              <attribute datatype='string' name='gridOrigin'>&quot;A1:D12226:no:A1:D12226:1&quot;</attribute>
-              <attribute datatype='integer' name='lost'>0</attribute>
-              <attribute datatype='integer' name='outcome'>1</attribute>
-              <attribute datatype='integer' name='processed'>36675</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>date</remote-name>
-            <remote-type>7</remote-type>
-            <local-name>[date]</local-name>
-            <parent-name>[aircraft_intrusions.csv]</parent-name>
-            <remote-alias>date</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>date</local-type>
-            <aggregation>Year</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>city</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[city]</local-name>
-            <parent-name>[aircraft_intrusions.csv]</parent-name>
-            <remote-alias>city</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <collation flag='1' name='LHE_RIL_S2' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>hour</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[hour]</local-name>
-            <parent-name>[aircraft_intrusions.csv]</parent-name>
-            <remote-alias>hour</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>minutes</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[minutes]</local-name>
-            <parent-name>[aircraft_intrusions.csv]</parent-name>
-            <remote-alias>minutes</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>City2</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[City2]</local-name>
-            <parent-name>[cities.csv]</parent-name>
-            <remote-alias>City2</remote-alias>
-            <ordinal>4</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <collation flag='1' name='LHE_RIL_S2' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_47BA00A35DC0413A93246B08378D160E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>mahoz</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[mahoz]</local-name>
-            <parent-name>[cities.csv]</parent-name>
-            <remote-alias>mahoz</remote-alias>
-            <ordinal>5</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <collation flag='1' name='LHE_RIL_S2' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_47BA00A35DC0413A93246B08378D160E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>date</remote-name>
-            <remote-type>7</remote-type>
-            <local-name>[date (rockets_missiles.csv)]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>date</remote-alias>
-            <ordinal>6</ordinal>
-            <local-type>date</local-type>
-            <aggregation>Year</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>city</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[city (rockets_missiles.csv)]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>city</remote-alias>
-            <ordinal>7</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <collation flag='1' name='LHE_RIL_S2' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>hour</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[hour (rockets_missiles.csv)]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>hour</remote-alias>
-            <ordinal>8</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>minutes</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[minutes (rockets_missiles.csv)]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>minutes</remote-alias>
-            <ordinal>9</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
-            </attributes>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-        </metadata-records>
-      </connection>
-      <aliases enabled='yes' />
-      <column datatype='string' name='[City2]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
-      <_.fcp.ObjectModelTableType.true...column caption='aircraft_intrusions.csv' datatype='table' name='[__tableau_internal_object_id__].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' role='measure' type='quantitative' />
-      <_.fcp.ObjectModelTableType.true...column caption='cities.csv' datatype='table' name='[__tableau_internal_object_id__].[cities.csv_47BA00A35DC0413A93246B08378D160E]' role='measure' type='quantitative' />
-      <_.fcp.ObjectModelTableType.true...column caption='rockets_missiles.csv' datatype='table' name='[__tableau_internal_object_id__].[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]' role='measure' type='quantitative' />
-      <column datatype='string' name='[city (rockets_missiles.csv)]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
-      <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
-      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 3.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='09/24/2024 01:10:40 PM' username=''>
-          <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' table='[Extract].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' type='table' />
-          <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
-            <relation name='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' table='[Extract].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' type='table' />
-            <relation name='cities.csv_47BA00A35DC0413A93246B08378D160E' table='[Extract].[cities.csv_47BA00A35DC0413A93246B08378D160E]' type='table' />
-            <_.fcp.ObjectModelSharedDimensions.true...relation name='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83' table='[Extract].[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]' type='table' />
-          </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
-          <cols>
-            <map key='[City2]' value='[cities.csv_47BA00A35DC0413A93246B08378D160E].[City2]' />
-            <map key='[city (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[city]' />
-            <map key='[city]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[city]' />
-            <map key='[date (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[date]' />
-            <map key='[date]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[date]' />
-            <map key='[hour (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[hour]' />
-            <map key='[hour]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[hour]' />
-            <map key='[mahoz]' value='[cities.csv_47BA00A35DC0413A93246B08378D160E].[mahoz]' />
-            <map key='[minutes (rockets_missiles.csv)]' value='[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83].[minutes]' />
-            <map key='[minutes]' value='[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269].[minutes]' />
-          </cols>
-          <refresh>
-            <refresh-event add-from-file-path=' Union Cities' increment-value='%null%' refresh-type='create' rows-inserted='18883' timestamp-start='2024-09-24 13:10:39.268' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>date</remote-name>
-              <remote-type>133</remote-type>
-              <local-name>[date]</local-name>
-              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
-              <remote-alias>date</remote-alias>
-              <ordinal>0</ordinal>
-              <family>aircraft_intrusions.csv</family>
-              <local-type>date</local-type>
-              <aggregation>Year</aggregation>
-              <approx-count>211</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>city</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[city]</local-name>
-              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
-              <remote-alias>city</remote-alias>
-              <ordinal>1</ordinal>
-              <family>aircraft_intrusions.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>304</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>hour</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[hour]</local-name>
-              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
-              <remote-alias>hour</remote-alias>
-              <ordinal>2</ordinal>
-              <family>aircraft_intrusions.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>25</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>minutes</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[minutes]</local-name>
-              <parent-name>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</parent-name>
-              <remote-alias>minutes</remote-alias>
-              <ordinal>3</ordinal>
-              <family>aircraft_intrusions.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>60</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>City2</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[City2]</local-name>
-              <parent-name>[cities.csv_47BA00A35DC0413A93246B08378D160E]</parent-name>
-              <remote-alias>City2</remote-alias>
-              <ordinal>4</ordinal>
-              <family>cities.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>1668</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_47BA00A35DC0413A93246B08378D160E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>mahoz</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[mahoz]</local-name>
-              <parent-name>[cities.csv_47BA00A35DC0413A93246B08378D160E]</parent-name>
-              <remote-alias>mahoz</remote-alias>
-              <ordinal>5</ordinal>
-              <family>cities.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>6</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[cities.csv_47BA00A35DC0413A93246B08378D160E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>date</remote-name>
-              <remote-type>133</remote-type>
-              <local-name>[date (rockets_missiles.csv)]</local-name>
-              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
-              <remote-alias>date</remote-alias>
-              <ordinal>6</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>date</local-type>
-              <aggregation>Year</aggregation>
-              <approx-count>410</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>city</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[city (rockets_missiles.csv)]</local-name>
-              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
-              <remote-alias>city</remote-alias>
-              <ordinal>7</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>882</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>hour</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[hour (rockets_missiles.csv)]</local-name>
-              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
-              <remote-alias>hour</remote-alias>
-              <ordinal>8</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>24</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>minutes</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[minutes (rockets_missiles.csv)]</local-name>
-              <parent-name>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</parent-name>
-              <remote-alias>minutes</remote-alias>
-              <ordinal>9</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>60</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;Israel&quot;' />
-      </semantic-values>
-      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-        <objects>
-          <object caption='aircraft_intrusions.csv' id='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269'>
-            <properties context=''>
-              <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='aircraft_intrusions.csv' table='[aircraft_intrusions#csv$]' type='table'>
-                <columns gridOrigin='A1:D4991:no:A1:D4991:1'>
-                  <column datatype='date' name='date' ordinal='0' />
-                  <column datatype='string' name='city' ordinal='1' />
-                  <column datatype='integer' name='hour' ordinal='2' />
-                  <column datatype='integer' name='minutes' ordinal='3' />
-                </columns>
-              </relation>
-            </properties>
-            <properties context='extract'>
-              <relation name='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' table='[Extract].[aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269]' type='table' />
-            </properties>
-          </object>
-          <object caption='cities.csv' id='cities.csv_47BA00A35DC0413A93246B08378D160E'>
-            <properties context=''>
-              <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='cities.csv' table='[cities#csv$]' type='table'>
-                <columns gridOrigin='A1:B1669:no:A1:B1669:0'>
-                  <column datatype='string' name='City2' ordinal='0' />
-                  <column datatype='string' name='mahoz' ordinal='1' />
-                </columns>
-              </relation>
-            </properties>
-            <properties context='extract'>
-              <relation name='cities.csv_47BA00A35DC0413A93246B08378D160E' table='[Extract].[cities.csv_47BA00A35DC0413A93246B08378D160E]' type='table' />
-            </properties>
-          </object>
-          <_.fcp.ObjectModelSharedDimensions.true...object caption='rockets_missiles.csv' id='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83'>
-            <properties context=''>
-              <relation connection='textscan.1cahyrg11lheax13fpuyc1sz7432' name='rockets_missiles.csv' table='[rockets_missiles#csv$]' type='table'>
-                <columns gridOrigin='A1:D12226:no:A1:D12226:1'>
-                  <column datatype='date' name='date' ordinal='0' />
-                  <column datatype='string' name='city' ordinal='1' />
-                  <column datatype='integer' name='hour' ordinal='2' />
-                  <column datatype='integer' name='minutes' ordinal='3' />
-                </columns>
-              </relation>
-            </properties>
-            <properties context='extract'>
-              <relation name='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83' table='[Extract].[rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83]' type='table' />
-            </properties>
-          </_.fcp.ObjectModelSharedDimensions.true...object>
-        </objects>
-        <relationships>
-          <relationship>
-            <expression op='='>
-              <expression op='[city]' />
-              <expression op='[City2]' />
-            </expression>
-            <first-end-point object-id='aircraft_intrusions.csv_52EBC9FC6A504485B272F3D6FAF7A269' />
-            <second-end-point object-id='cities.csv_47BA00A35DC0413A93246B08378D160E' />
-          </relationship>
-          <_.fcp.ObjectModelSharedDimensions.true...relationship>
-            <expression op='='>
-              <expression op='[city (rockets_missiles.csv)]' />
-              <expression op='[City2]' />
-            </expression>
-            <first-end-point object-id='rockets_missiles.csv_9CFAA7B59A8A4571ADE25D581B44CF83' />
-            <second-end-point object-id='cities.csv_47BA00A35DC0413A93246B08378D160E' />
-          </_.fcp.ObjectModelSharedDimensions.true...relationship>
-        </relationships>
-      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-    </datasource>
-    <datasource caption='rockets_missiles' inline='true' name='federated.1r6bwf21nq2zps114b0sy1o4p2r8' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='rockets_missiles' name='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4'>
-            <connection class='textscan' cleaning='yes' compat='no' csvFile='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData/rockets_missiles.csv' dataRefreshTime='' directory='C:/Fun projects/RedAlert/RedAlertGraphs/csv/newData' interpretationMode='8' validate='no' workgroup-auth-mode='as-is' />
-          </named-connection>
-        </named-connections>
-        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4' name='rockets_missiles.csv' table='[C:\Fun projects\RedAlert\RedAlertGraphs\csv\newData\rockets_missiles#csv]' type='table'>
-          <columns character-set='UTF-8' gridOrigin='A1:D10916:no:A1:D10916:1' header='yes' locale='he_IL' separator=','>
-            <column datatype='date' name='date' ordinal='0' />
-            <column datatype='string' name='city' ordinal='1' />
-            <column datatype='integer' name='hour' ordinal='2' />
-            <column datatype='integer' name='minutes' ordinal='3' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
-        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4' name='rockets_missiles.csv' table='[C:\Fun projects\RedAlert\RedAlertGraphs\csv\newData\rockets_missiles#csv]' type='table'>
-          <columns character-set='UTF-8' gridOrigin='A1:D10916:no:A1:D10916:1' header='yes' locale='he_IL' separator=','>
-            <column datatype='date' name='date' ordinal='0' />
-            <column datatype='string' name='city' ordinal='1' />
-            <column datatype='integer' name='hour' ordinal='2' />
-            <column datatype='integer' name='minutes' ordinal='3' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;he&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;₪&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;‏&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='gridOrigin'>&quot;A1:D10916:no:A1:D10916:1&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;he_IL&quot;</attribute>
-              <attribute datatype='string' name='minus-char'>&quot;‎-&quot;</attribute>
-              <attribute datatype='string' name='plus-char'>&quot;‎+&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>date</remote-name>
-            <remote-type>133</remote-type>
-            <local-name>[date]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>date</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>date</local-type>
-            <aggregation>Year</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>city</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[city]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>city</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LHE_RIL' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>hour</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[hour]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>hour</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-            <remote-name>minutes</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[minutes]</local-name>
-            <parent-name>[rockets_missiles.csv]</parent-name>
-            <remote-alias>minutes</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-        </metadata-records>
-      </connection>
-      <aliases enabled='yes' />
-      <column caption='NumberOfHours' datatype='integer' name='[Calculation_1999879769667284992]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='COUNT([hour])' />
-      </column>
-      <_.fcp.ObjectModelTableType.true...column caption='rockets_missiles.csv' datatype='table' name='[__tableau_internal_object_id__].[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]' role='measure' type='quantitative' />
-      <column datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
-      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
-        <connection authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/AlarmsIsrael3.twb Files/federated 4.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='09/10/2024 12:08:37 PM' username=''>
-          <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh>
-            <refresh-event add-from-file-path='rockets_missiles' increment-value='%null%' refresh-type='create' rows-inserted='10973' timestamp-start='2024-09-10 12:08:36.369' />
-          </refresh>
-          <metadata-records>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>date</remote-name>
-              <remote-type>133</remote-type>
-              <local-name>[date]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>date</remote-alias>
-              <ordinal>0</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>date</local-type>
-              <aggregation>Year</aggregation>
-              <approx-count>435</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>city</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[city]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>city</remote-alias>
-              <ordinal>1</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>736</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LHE_RIL' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>hour</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[hour]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>hour</remote-alias>
-              <ordinal>2</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>24</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
-              <remote-name>minutes</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[minutes]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>minutes</remote-alias>
-              <ordinal>3</ordinal>
-              <family>rockets_missiles.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>60</approx-count>
-              <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;Israel&quot;' />
-      </semantic-values>
-      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-        <objects>
-          <_.fcp.ObjectModelSharedDimensions.true...object caption='rockets_missiles.csv' id='rockets_missiles.csv_6458A2D3F6334BF48D79D4C529305B7A'>
-            <properties context=''>
-              <relation connection='textscan.1vaza7y1ccz3wj1f3saqq1x13xw4' name='rockets_missiles.csv' table='[C:\Fun projects\RedAlert\RedAlertGraphs\csv\newData\rockets_missiles#csv]' type='table'>
-                <columns character-set='UTF-8' gridOrigin='A1:D10916:no:A1:D10916:1' header='yes' locale='he_IL' separator=','>
-                  <column datatype='date' name='date' ordinal='0' />
-                  <column datatype='string' name='city' ordinal='1' />
-                  <column datatype='integer' name='hour' ordinal='2' />
-                  <column datatype='integer' name='minutes' ordinal='3' />
-                </columns>
-              </relation>
-            </properties>
-            <properties context='extract'>
-              <relation name='Extract' table='[Extract].[Extract]' type='table' />
-            </properties>
-          </_.fcp.ObjectModelSharedDimensions.true...object>
-        </objects>
-      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-    </datasource>
   </datasources>
   <actions>
     <action caption='Filter1' name='[Action1_A9FC2538201C455F8DF3D29273C95DA0]'>
@@ -5860,6 +5819,7 @@
   </actions>
   <worksheets>
     <worksheet name='Alarms In Districts'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/AlarmsInDistricts?rev=' id='108700605' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6008,7 +5968,7 @@
           </formatted-text>
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/CombinedDays?rev=' id='108236490' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/CombinedDays?rev=' id='108700614' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6030,10 +5990,7 @@
             <column-instance column='[date]' derivation='Year' name='[yr:date:ok]' pivot='key' type='ordinal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[my:date:ok]' filter-group='5'>
-            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[my:date:ok]' member='202409' />
-              <groupfilter function='member' level='[my:date:ok]' member='202410' />
-            </groupfilter>
+            <groupfilter function='member' level='[my:date:ok]' member='202411' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:Calculation_1999879769677549591:nk]'>
             <groupfilter function='level-members' level='[none:Calculation_1999879769677549591:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -6098,7 +6055,7 @@
           </formatted-text>
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/CombinedHours?rev=' id='108236488' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/CombinedHours?rev=' id='108700610' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6174,7 +6131,7 @@
           </formatted-text>
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/CombinedMinutes?rev=' id='108236487' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/CombinedMinutes?rev=' id='108700609' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6265,7 +6222,7 @@
           </formatted-text>
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/CombinedWeeks?rev=' id='108236486' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/CombinedWeeks?rev=' id='108700608' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6342,7 +6299,7 @@
           </formatted-text>
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/Combinedcities?rev=' id='108236485' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Combinedcities?rev=' id='108700600' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6415,7 +6372,7 @@
           <formatted-text />
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/PieCountalarms?rev=' id='108236491' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/PieCountalarms?rev=' id='108700615' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6433,10 +6390,7 @@
             <column-instance column='[Calculation_1999879769677549591]' derivation='None' name='[none:Calculation_1999879769677549591:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[my:date:ok]' filter-group='5'>
-            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[my:date:ok]' member='202409' />
-              <groupfilter function='member' level='[my:date:ok]' member='202410' />
-            </groupfilter>
+            <groupfilter function='member' level='[my:date:ok]' member='202411' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:Calculation_1999879769677549591:nk]'>
             <groupfilter function='level-members' level='[none:Calculation_1999879769677549591:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -6510,7 +6464,7 @@
           <formatted-text />
         </title>
       </layout-options>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/PieCountalarmsdistricts?rev=' id='108236492' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/PieCountalarmsdistricts?rev=' id='108700616' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6531,10 +6485,7 @@
             <column-instance column='[mahoz]' derivation='None' name='[none:mahoz:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[my:date:ok]' filter-group='5'>
-            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[my:date:ok]' member='202409' />
-              <groupfilter function='member' level='[my:date:ok]' member='202410' />
-            </groupfilter>
+            <groupfilter function='member' level='[my:date:ok]' member='202411' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:Calculation_1999879769677549591:nk]'>
             <groupfilter function='level-members' level='[none:Calculation_1999879769677549591:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -6603,6 +6554,7 @@
       <simple-id uuid='{9CE5C48D-30AA-4BBD-B727-C0A459694399}' />
     </worksheet>
     <worksheet name='Sheet 11'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Sheet11?rev=' id='108700604' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6642,6 +6594,7 @@
       <simple-id uuid='{9D6F410E-B351-474C-B042-9C6A7094D95A}' />
     </worksheet>
     <worksheet name='Sheet 12'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Sheet12?rev=' id='108700602' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -6715,6 +6668,7 @@
       <simple-id uuid='{F45D14DE-CDA5-435E-B172-8053942D626B}' />
     </worksheet>
     <worksheet name='Sheet 9'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Sheet9?rev=' id='108700601' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -8211,6 +8165,7 @@
       <simple-id uuid='{A8C87EE2-C92A-4309-A77D-24884BA43781}' />
     </worksheet>
     <worksheet name='Sheet 9 (2)'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Sheet92?rev=' id='108700603' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <table>
         <view>
           <datasources>
@@ -8285,7 +8240,7 @@
   </worksheets>
   <dashboards>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Alarms in Months'>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/AlarmsinMonths?rev=' id='108236494' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/AlarmsinMonths?rev=' id='108700618' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='900' maxwidth='1600' minheight='900' minwidth='1600' preset-index='8' sizing-mode='fixed' />
       <datasources>
@@ -8314,8 +8269,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1150' minheight='1150' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='44' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='43' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
+            <zone h='100000' id='56' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='55' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
                 <zone fixed-size='280' h='36444' id='9' is-fixed='true' name='Pie Count alarms districts' w='30813' x='14188' y='556'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -8393,7 +8348,7 @@
       <simple-id uuid='{D35BC8D1-A99F-43DD-807A-2B9F842A1ABD}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Cities Dashboard'>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/CitiesDashboard?rev=' id='108236495' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/CitiesDashboard?rev=' id='108700619' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='900' maxwidth='1600' minheight='900' minwidth='1600' preset-index='8' sizing-mode='fixed' />
       <datasources>
@@ -8459,8 +8414,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='48' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='47' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
+            <zone h='100000' id='60' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='59' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
                 <zone h='20445' id='8' mode='checkdropdown' name='Combined cities' param='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:mahoz:nk]' type-v2='filter' values='all' w='10000' x='89500' y='889'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -8511,6 +8466,7 @@
       <simple-id uuid='{2599E3AE-B8A1-4D4C-B3E7-06A2D306FB26}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Dashboard?rev=' id='108700606' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='768' maxwidth='1366' minheight='768' minwidth='1366' preset-index='0' sizing-mode='fixed' />
       <datasources>
@@ -8564,8 +8520,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='21' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='20' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='33' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='32' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone h='23959' id='8' mode='checkdropdown' name='Alarms In Districts' param='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:mahoz:nk]' type-v2='filter' w='11713' x='87701' y='1042'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -8607,7 +8563,7 @@
       <simple-id uuid='{0C6F5A28-4E6F-4624-B528-2C86A45C0F5A}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard 1 Old'>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/Dashboard1?rev=' id='108236489' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Dashboard1Old?rev=' id='108700611' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='900' maxwidth='1600' minheight='900' minwidth='1600' preset-index='8' sizing-mode='fixed' />
       <datasources>
@@ -8643,8 +8599,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1150' minheight='1150' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='78' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='77' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
+            <zone h='100000' id='90' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='89' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
                 <zone fixed-size='280' h='50222' id='15' is-fixed='true' name='Combined Weeks' w='98250' x='1188' y='333'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -8722,6 +8678,7 @@
       <simple-id uuid='{5B1D5A01-AB62-4EFD-90CF-A2F536D875C5}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard 1.2'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Dashboard1_2?rev=' id='108700613' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' preset-index='1' sizing-mode='fixed' />
       <datasources>
@@ -8755,8 +8712,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='800' minheight='800' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='78' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='77' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='90' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='89' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='280' h='50250' id='34' is-fixed='true' name='Combined Hours' w='81300' x='900' y='750'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -8816,6 +8773,7 @@
       <simple-id uuid='{1FA8311E-ED9B-41E0-A659-52516697699D}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard 6'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Dashboard6?rev=' id='108700612' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='768' maxwidth='1366' minheight='768' minwidth='1366' preset-index='0' sizing-mode='fixed' />
       <datasources>
@@ -8839,8 +8797,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='26' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='25' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='38' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='37' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone h='26563' id='4' mode='checkdropdown' name='Combined Weeks' param='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:mahoz:nk]' type-v2='filter' w='9883' x='90337' y='3255'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -8891,6 +8849,7 @@
       <simple-id uuid='{917A486A-A7D2-49F5-A060-AD78C8EC5234}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard 7'>
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/Dashboard7?rev=' id='108700607' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
       <zones>
@@ -8915,8 +8874,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='20' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='19' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='32' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='31' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone forceUpdate='true' h='43375' id='10' param='[com.inovista.extension.racebar].[1.0].[https://extensions.tableauusercontent.com/sandbox/bar-race/racebar.html]' type-v2='dashboard-object' w='64000' x='36500' y='1375'>
                   <add-in add-in-id='com.inovista.extension.racebar' extension-url='https://extensions.tableauusercontent.com/sandbox/bar-race/racebar.html' extension-version='1.0' instance-id='E7B95A1CE2404EC5900F19137617057E'>
                     <instance-settings>
@@ -8962,7 +8921,7 @@
       <simple-id uuid='{21D7868B-9A0C-4421-A85A-FF9D8F6E765B}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='OLD Dashboard 3'>
-      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3/OLDDashboard3?rev=' id='108236493' path='/workbooks/AlarmsIsrael3' revision='' />
+      <repository-location derived-from='https://vizhub/workbooks/AlarmsIsrael3DistrictsInTime/OLDDashboard3?rev=' id='108700617' path='/workbooks/AlarmsIsrael3DistrictsInTime' revision='' />
       <style />
       <size maxheight='900' maxwidth='1600' minheight='900' minwidth='1600' preset-index='8' sizing-mode='fixed' />
       <datasources>
@@ -9043,14 +9002,14 @@
           </zone-style>
         </zone>
         <zone h='42889' id='21' name='Pie Count alarms districts' w='31625' x='3813' y='1556' />
-        <zone h='28111' id='20' name='Pie Count alarms' w='11375' x='88313' y='69444' />
+        <zone h='28111' id='20' name='Pie Count alarms' w='11375' x='64313' y='4444' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1150' minheight='1150' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='53' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='52' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
+            <zone h='100000' id='65' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='64' param='vert' type-v2='layout-flow' w='99000' x='500' y='889'>
                 <zone fixed-size='24' h='3556' id='6' name='Combined Days' param='[federated.1j2yl9p1uk4ruk1aofd4h0ebfy6z].[none:MACHOZ:nk]' type-v2='filter' w='10000' x='89500' y='889'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -9114,7 +9073,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='253' h='28111' id='20' is-fixed='true' name='Pie Count alarms' w='11375' x='88313' y='69444'>
+                <zone fixed-size='253' h='28111' id='20' is-fixed='true' name='Pie Count alarms' w='11375' x='64313' y='4444'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -9203,7 +9162,7 @@
       </viewpoint>
       <simple-id uuid='{BA189D90-06E2-4C53-BC82-DA084FC6ECAE}' />
     </window>
-    <window class='worksheet' maximized='true' name='Sheet 12'>
+    <window class='worksheet' name='Sheet 12'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -9231,11 +9190,6 @@
         </edge>
       </cards>
       <viewpoint>
-        <current-page>
-          <multibucket>
-            <bucket>#2024-10-01 00:00:00#</bucket>
-          </multibucket>
-        </current-page>
         <zoom type='entire-view' />
       </viewpoint>
       <simple-id uuid='{924A7102-7C01-4D3A-B844-5560FE175414}' />
@@ -9261,13 +9215,6 @@
           </strip>
         </edge>
       </cards>
-      <viewpoint>
-        <current-page>
-          <multibucket>
-            <bucket>#2024-10-01 00:00:00#</bucket>
-          </multibucket>
-        </current-page>
-      </viewpoint>
       <simple-id uuid='{75425405-6C15-46F1-AB03-AF31524154DE}' />
     </window>
     <window class='worksheet' name='Sheet 11'>
@@ -9334,27 +9281,15 @@
           </strip>
         </edge>
       </cards>
-      <viewpoint>
-        <current-page>
-          <multibucket>
-            <bucket>#2024-04-07 00:00:00#</bucket>
-          </multibucket>
-        </current-page>
-      </viewpoint>
       <simple-id uuid='{257E6498-5EE5-4B58-86A8-61FE0D3B06F7}' />
     </window>
     <window class='dashboard' name='Dashboard' tab-color='#4f779a'>
       <viewpoints>
         <viewpoint name='Alarms In Districts'>
-          <current-page>
-            <multibucket>
-              <bucket>#2024-04-07 00:00:00#</bucket>
-            </multibucket>
-          </current-page>
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='-1' />
+      <active id='3' />
       <simple-id uuid='{603FE2C6-755B-4802-B857-269F64C64EF8}' />
     </window>
     <window class='dashboard' name='Dashboard 7'>
@@ -9475,7 +9410,7 @@
       <active id='39' />
       <simple-id uuid='{DC3EEB1F-C9E9-40FC-B0BF-CBC1F53F7996}' />
     </window>
-    <window class='dashboard' name='Dashboard 6'>
+    <window class='dashboard' maximized='true' name='Dashboard 6'>
       <viewpoints>
         <viewpoint name='Combined Weeks'>
           <zoom type='entire-view' />
@@ -9603,7 +9538,7 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='1' />
+      <active id='-1' />
       <simple-id uuid='{DC90EB7C-C749-42AB-9DD8-7C457386089C}' />
     </window>
     <window class='dashboard' name='Alarms in Months'>
@@ -9618,14 +9553,14 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='-1' />
+      <active id='4' />
       <simple-id uuid='{D2297539-A1D0-440A-8CBB-EEE406C88035}' />
     </window>
     <window class='dashboard' name='Cities Dashboard'>
       <viewpoints>
         <viewpoint name='Combined cities' />
       </viewpoints>
-      <active id='-1' />
+      <active id='8' />
       <simple-id uuid='{5D8D4FB2-927F-487A-8C35-22DF3917B858}' />
     </window>
   </windows>

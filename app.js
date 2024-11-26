@@ -2,11 +2,11 @@
 
 // Array of Tableau dashboard URLs
 const dashboardURLs = [
-    "https://public.tableau.com/views/AlarmsIsrael3DistrictsInTime/Dashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-    "https://public.tableau.com/views/AlarmsInHoursMinutes/Dashboard1_2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-    "https://public.tableau.com/views/AlarmsInWeeks/Dashboard6?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-    "https://public.tableau.com/views/AlarmsInDates2/AlarmsinMonths?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-    "https://public.tableau.com/views/AlarmsInCities2/CitiesDashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+    "https://public.tableau.com/views/RedAlerts1/Dashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/RedAlerts2/Dashboard1_2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/RedAlerts3/Dashboard6?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/RedAlerts4/AlarmsinMonths?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    "https://public.tableau.com/views/RedAlerts5/CitiesDashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
 ];
 
 const dashboardNames = [
