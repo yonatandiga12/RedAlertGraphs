@@ -24,7 +24,15 @@ View Red Alert alarms in graphs, including : alarms per hours, per minute and pe
 <p align="center">
   <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/screenshot6.jpg" width="1000" title="img6">
 </p>
-
+<br /> 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/1.jpg" width="1000" title="img5">
+</p>
+<br /> 
+<br /> 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yonatandiga12/RedAlertGraphs/main/screenshots/2.jpg" width="1000" title="img6">
+</p>
 
 ## Additional Info:
 <br />  
